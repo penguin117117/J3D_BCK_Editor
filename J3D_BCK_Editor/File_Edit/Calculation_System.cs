@@ -129,7 +129,7 @@ namespace J3D_BCK_Editor.File_Edit
         public static float hex2float(BinaryReader br, int readbyte = 4) {
 
             //string str = string.Format("{0:}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'));
-            string str = string.Format("{0:f6}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", ""));
+            string str = string.Format("{0:f3}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", ""));
             string hexString = str;
             uint num = uint.Parse(hexString, NumberStyles.AllowHexSpecifier);
             byte[] floatVals = BitConverter.GetBytes(num);

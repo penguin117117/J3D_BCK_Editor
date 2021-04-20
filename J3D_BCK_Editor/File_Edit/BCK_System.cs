@@ -67,7 +67,7 @@ namespace J3D_BCK_Editor.File_Edit
         public void Scale_Trans_Writer(BinaryWriter bw , DataGridView dgv ,string Column_Name)
         {
             int dgv_row_total = dgv.Rows.Count;
-            for (int i = 0; i < dgv_row_total - 1; i++)
+            for (int i = 0; i < dgv_row_total ; i++)
             {
                 //bw.Write(CS.StringToBytes(
                 //    CS.Float_ToHexString_2(

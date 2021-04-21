@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 using System.Windows.Forms;
 using J3D_BCK_Editor.File_Edit;
 
@@ -150,6 +151,8 @@ namespace J3D_BCK_Editor
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+
             chart1.Series.Clear();  // ← 最初からSeriesが1つあるのでクリアします
             chart1.ChartAreas.Clear();
 
@@ -246,6 +249,8 @@ namespace J3D_BCK_Editor
 
 
         }
+
+       
 
         //public void DrawBeziersPointF(PaintEventArgs e)
         //{

@@ -69,14 +69,7 @@ namespace J3D_BCK_Editor.File_Edit
             int dgv_row_total = dgv.Rows.Count;
             for (int i = 0; i < dgv_row_total ; i++)
             {
-                //bw.Write(CS.StringToBytes(
-                //    CS.Float_ToHexString_2(
-                //        float.Parse(
-
-                //       string.Format("{0:F6}",dgv.Rows[i].Cells[Column_Name].Value.ToString()))
-                //            )
-                //        )
-                //    );
+                CS.ToHexString(dgv.Rows[i].Cells[Column_Name].Value.ToString());
                 bw.Write(CS.StringToBytes(
                     CS.Float_ToHexString_2(
                       float.Parse(

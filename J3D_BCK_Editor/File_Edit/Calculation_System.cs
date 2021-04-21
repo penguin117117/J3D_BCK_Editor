@@ -163,6 +163,26 @@ namespace J3D_BCK_Editor.File_Edit
             
         }
 
+        public static byte[] ToHexString(string str)
+        {
+            var f = float.Parse(str);
+            var bytes = BitConverter.GetBytes(f);
+            var i = BitConverter.ToInt32(bytes, 0);
+            Console.WriteLine("str→byte_"+ "0x" + i.ToString("X8"));
+            return bytes;
+        }
+
+        public static float FromHexString(BinaryReader br)
+        {
+
+            var b = br.ReadBytes(4);
+            var b2 = b.Reverse().ToArray();
+            float i = BitConverter.ToSingle(b2,0);
+            Console.WriteLine("Binary→Float_" + i.ToString());
+            return i;
+        }
+
+
         //public static byte[] FloatString2Bytes(string str) 
         //{
         //    List<byte[]> bit= new List<byte[]>() ;

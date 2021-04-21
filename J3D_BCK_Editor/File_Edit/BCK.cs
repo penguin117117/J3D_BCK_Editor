@@ -155,34 +155,18 @@ namespace J3D_BCK_Editor.File_Edit
 
             padnum = (Bone_Num * 9 * 6);
             padcount = 0;
+
+         //★パディング2
             bcksys.Padding(br);
-
-
-            //★パディング2
-            //debug.AppendText("\r\n");
-            //for (int k = padnum + 96; (k % 32f) != 0; k++)
-            //{
-            //    debug.AppendText(CS.Byte2Char(br,1));
-            //    Console.WriteLine(padcount++);
-                
-            //}
 
          //★scaletable
             for (int l = 0;l<Scale_Table_Count;l++) 
             {
-                //dgv2.Rows.Add(l, string.Format("{0:f}", CS.Byte2Float(br)));
-
-                dgv2.Rows.Add(l, string.Format("{0:0.##########}", CS.hex2float(br)));
-                //dgv2.Rows.Add(l, string.Format("{0}", CS.hex2int(br)));
+                //dgv2.Rows.Add(l, string.Format("{0:f10}", CS.hex2float(br)));
+                Console.WriteLine("▽現在"+fs.Position);
+                dgv2.Rows.Add(l, string.Format("{0:}", CS.FromHexString(br)));
             }
-            //for (int m = 0; (Bone_Num * 9) > m; m = m + 3)
-            //{
-            //    dgv1.Rows[m].Cells["Scale_Value"].Value.ToString();
-            //}
-            //bcksys.Mode_Checker(Bone_Num, 0, true);
-            Console.WriteLine("\n\r"+Convert.ToSingle(0x41769962)+"だぶる");
             
-
             padnum =  padnum + 96+padcount;
             padcount = 0;
          //★パディング3

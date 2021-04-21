@@ -79,9 +79,9 @@ namespace J3D_BCK_Editor.File_Edit
                 //    );
                 bw.Write(CS.StringToBytes(
                     CS.Float_ToHexString_2(
-                      Single.Parse(
+                      float.Parse(
 
-                       string.Format("{0:F10}", dgv.Rows[i].Cells[Column_Name].Value.ToString()))
+                       string.Format("{0:0.##########}", dgv.Rows[i].Cells[Column_Name].Value.ToString()),CultureInfo.InvariantCulture.NumberFormat)
                           )
                         )
                     );

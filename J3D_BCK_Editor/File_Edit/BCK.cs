@@ -172,7 +172,7 @@ namespace J3D_BCK_Editor.File_Edit
             {
                 //dgv2.Rows.Add(l, string.Format("{0:f}", CS.Byte2Float(br)));
 
-                dgv2.Rows.Add(l, string.Format("{0:f10}", CS.hex2float(br)));
+                dgv2.Rows.Add(l, string.Format("{0:0.##########}", CS.hex2float(br)));
                 //dgv2.Rows.Add(l, string.Format("{0}", CS.hex2int(br)));
             }
             //for (int m = 0; (Bone_Num * 9) > m; m = m + 3)
@@ -180,8 +180,8 @@ namespace J3D_BCK_Editor.File_Edit
             //    dgv1.Rows[m].Cells["Scale_Value"].Value.ToString();
             //}
             //bcksys.Mode_Checker(Bone_Num, 0, true);
-
-
+            Console.WriteLine("\n\r"+Convert.ToSingle(0x41769962)+"だぶる");
+            
 
             padnum =  padnum + 96+padcount;
             padcount = 0;

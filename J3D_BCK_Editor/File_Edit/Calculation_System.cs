@@ -128,6 +128,7 @@ namespace J3D_BCK_Editor.File_Edit
 
         public static float hex2float(BinaryReader br, int readbyte = 4) {
 
+            
             //string str = string.Format("{0:}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'));
             string str = string.Format("{0:f3}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", ""));
             string hexString = str;
@@ -138,6 +139,18 @@ namespace J3D_BCK_Editor.File_Edit
             return  f;
         }
 
+        public static float hex2float_2(BinaryReader br, int readbyte = 4)
+        {
+            string str = BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "");
+            string hexString = str;
+            float f;
+            f = Convert.ToSingle(Int32.Parse(str, NumberStyles.HexNumber));
+            //uint num = uint.Parse(hexString,NumberStyles.HexNumber);
+            //byte[] floatVals = BitConverter.GetBytes(num);
+            //float f = BitConverter.ToSingle(floatVals, 0);
+            //Console.WriteLine("float convert = {0:f6}", f);
+            return f;
+        }
 
 
         public static int hex2int(BinaryReader br, int readbyte = 4)

@@ -138,6 +138,7 @@ namespace J3D_BCK_Editor.File_Edit
                 Tangent_Int = Convert.ToInt32(Tangent_String);
                 if (type_num == 1)
                 {
+                    debug.AppendText(EN.NewLine+ "Rot_" + Start_Frame_String + "__" + Frame_Num_String + "__" + Tangent_String);
                     bool write_read = dgv_write;
                     Rot_Mode(write_read);
                 }
@@ -168,26 +169,47 @@ namespace J3D_BCK_Editor.File_Edit
         public void Rot_Mode(bool dgv_write) 
         {
             int[] rotList = new int[dgv3.Rows.Count];
+            //int[] rotList_Num = new int[dgv3.Rows.Count];
+            //int[] rotList_Start = new int[dgv3.Rows.Count];
+            //int[] rotList_Tangent = new int[dgv3.Rows.Count];
+
             float dgv3float;
             if (Tangent_String == "0" && Frame_Num_String == "1")
             {
-                rotList[Start_Frame_Int] = Start_Frame_Int;
+                rotList[Start_Frame_Int] = Start_Frame_Int + 1;
+
+                //rotList_Num[Start_Frame_Int] = Frame_Num_Int;
+                //rotList_Start[Start_Frame_Int] =Start_Frame_Int;
+                //rotList_Tangent[Start_Frame_Int] = Tangent_Int;
             }
             else if (Tangent_String == "0" && (Start_Frame_Int > 0) && (Frame_Num_Int > 1))
             {
+                //rotList_Num[Start_Frame_Int] = Frame_Num_Int;
+                //rotList_Start[Start_Frame_Int] = Start_Frame_Int;
+                //rotList_Tangent[Start_Frame_Int] = Tangent_Int;
                 for (int i = (Start_Frame_Int + 1); (Start_Frame_Int + 1) + (Frame_Num_Int * 3) > i; i = i + 3)
                 {
                     rotList[i] = i;
+                    
                 }
             }
             else if (Tangent_String == "1" && Frame_Num_String != "1")
             {
+                //rotList_Num[Start_Frame_Int] = Frame_Num_Int;
+                //rotList_Start[Start_Frame_Int] = Start_Frame_Int;
+                //rotList_Tangent[Start_Frame_Int] = Tangent_Int;
                 for (int j = (Start_Frame_Int + 1); (Start_Frame_Int + 1) + (Frame_Num_Int * 4) > j; j = j + 4)
                 {
                     rotList[j] = j;
                 }
             }
             rotList = rotList.Where(x => x != 0).ToArray();
+            //rotList_Num = rotList_Num.Where(x => ((x != 0) && (x != 1))).ToArray();
+            //rotList_Tangent = rotList_Tangent.Where(x => ((rotList_Num[x] != 0) && (rotList_Num[x] != 1))).ToArray();
+            //rotList_Start = rotList_Start.Where(x => ((rotList_Num[x] != 0) && (rotList_Num[x] != 1))).ToArray();
+            //rotList_Num = rotList_Num.Where(x => ((x != 0) && (x != 1))).ToArray();
+
+            //debug.AppendText("_______"+ rotList_Num.Length);
             int frac = 1;
             
             for (int f = 0; f < Rotation_Frac;f++) 
@@ -196,9 +218,10 @@ namespace J3D_BCK_Editor.File_Edit
                 
             }
 
-
+            
             foreach (int a in rotList)
             {
+                
                 if (dgv_write　== true)
                 {
                     dgv3float = Convert.ToSingle(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
@@ -212,9 +235,18 @@ namespace J3D_BCK_Editor.File_Edit
                     dgv3float = (dgv3float /frac)*182;
                     dgv3.Rows[a].Cells["Rotation_Value"].Value = Convert.ToInt16(dgv3float);
                 }
-
-                debug.AppendText(EN.NewLine + a.ToString()+"リスト");
+                
+                //debug.AppendText(EN.NewLine + a.ToString()+"__リスト");
+                
             }
+
+            //for (int index = 0; rotList.Length > index; index++)
+            //{
+            //    if(((rotList_Start[index] == 0)&& (rotList_Num[index] == 0)&& (rotList_Tangent[index] == 0))==false)
+            //    debug.AppendText(EN.NewLine + rotList_Start[index].ToString() + "__" + rotList_Num[index].ToString() + "__"+ rotList_Tangent[index].ToString());
+            //}
+
+
         }
 
         public void Scale_Trans_Mode(bool dgv_write ,DataGridView dgv ,string cell_name)

@@ -71,6 +71,8 @@ namespace J3D_BCK_Editor.File_Edit
         protected static int Frame_Num_Int, Start_Frame_Int, Tangent_Int;
 
         protected static List<short> Rot_Mode_sh;
+
+        protected static string[] rotList_Num, rotList_Start, rotList_Tangent;
     }
 
     class BCK:BCK_State

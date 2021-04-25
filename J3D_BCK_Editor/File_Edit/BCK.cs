@@ -23,6 +23,8 @@ namespace J3D_BCK_Editor.File_Edit
         public static DataGridView dgv2 = Form1.Form1Instance.dataGridView2;
         public static DataGridView dgv3 = Form1.Form1Instance.dataGridView3;
         public static DataGridView dgv4 = Form1.Form1Instance.dataGridView4;
+        public static PictureBox pic1 = Form1.Form1Instance.pictureBox1;
+
         public static List<string> Anim_scale_str = new List<string>();
         public static List<string> Anim_rotation_str = new List<string>();
 
@@ -70,9 +72,13 @@ namespace J3D_BCK_Editor.File_Edit
         protected static string Frame_Num_String, Start_Frame_String, Tangent_String;
         protected static int Frame_Num_Int, Start_Frame_Int, Tangent_Int;
 
-        protected static List<short> Rot_Mode_sh;
+        protected static List<List<int>> Plot_List_Rot_Combo = new List<List<int>>();
+        
+        //protected static List<int> Plot_List_AnimNum = new List<int>();
+        
+        //protected static List<int> Plot_List_AnimData = new List<int>();
 
-        protected static string[] rotList_Num, rotList_Start, rotList_Tangent;
+        protected static int[] rotList_Num, rotList_Start, rotList_Tangent;
     }
 
     class BCK:BCK_State
@@ -206,6 +212,7 @@ namespace J3D_BCK_Editor.File_Edit
 
             }
             bcksys.Mode_Checker(Bone_Num,1,true);
+            bcksys.Mode_Checker(Bone_Num, 1, true ,true);
 
             //for (int m = 1; (Bone_Num*9) > m;　m=m+3)
             //{
@@ -228,7 +235,7 @@ namespace J3D_BCK_Editor.File_Edit
             //    {
             //        Console.WriteLine("if02");
             //        Console.WriteLine(rotfnn + "★" + rotsfn + "★" + rottann + "チェッカー");
-                    
+
             //        for (int i = (rotsfn+1 ); (rotsfn+1 ) + (rotfnn*3) > i; i = i +3)
             //        {
             //            Console.WriteLine("if02");
@@ -239,7 +246,7 @@ namespace J3D_BCK_Editor.File_Edit
             //            dgv3.Rows[i].Cells["Rotation_Value"].Value = Convert.ToSingle( dgv3float);
             //            dgv3.Rows[i].Cells["Rot_Element"].Value = "値_Sym";
             //        }
-                    
+
             //    }
             //    else if (rottanc == "1" && rotfnc != "1")
             //    {

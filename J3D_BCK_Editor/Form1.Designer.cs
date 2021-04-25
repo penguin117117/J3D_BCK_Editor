@@ -29,9 +29,9 @@ namespace J3D_BCK_Editor
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -483,8 +483,8 @@ namespace J3D_BCK_Editor
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.chart1);
             this.tabPage5.Controls.Add(this.button1);
+            this.tabPage5.Controls.Add(this.pictureBox1);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -495,23 +495,23 @@ namespace J3D_BCK_Editor
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(6, 72);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(794, 331);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(592, 222);
             this.chart1.TabIndex = 3;
             this.chart1.Text = "chart1";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 300);
+            this.button1.Location = new System.Drawing.Point(6, 331);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 35);
             this.button1.TabIndex = 2;
@@ -527,15 +527,15 @@ namespace J3D_BCK_Editor
             this.デバッグ.Multiline = true;
             this.デバッグ.Name = "デバッグ";
             this.デバッグ.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.デバッグ.Size = new System.Drawing.Size(592, 343);
+            this.デバッグ.Size = new System.Drawing.Size(592, 270);
             this.デバッグ.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox1.Location = new System.Drawing.Point(176, 427);
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(608, 222);
+            this.pictureBox1.Size = new System.Drawing.Size(592, 319);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
@@ -544,7 +544,7 @@ namespace J3D_BCK_Editor
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1407, 679);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.デバッグ);
             this.Controls.Add(this.groupBox1);
@@ -622,8 +622,8 @@ namespace J3D_BCK_Editor
         private System.Windows.Forms.DataGridViewTextBoxColumn Rotation_Table_Num;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rotation_Value;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 

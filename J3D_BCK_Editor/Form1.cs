@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using J3D_BCK_Editor.File_Edit;
 
+
 namespace J3D_BCK_Editor
 {
     public partial class Form1 : Form
@@ -149,93 +150,80 @@ namespace J3D_BCK_Editor
                 dataGridView4.Rows.RemoveAt(dataGridView4.Rows.Count - 1);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
-            
+            Plot pt = new Plot();
+            pt.Draw(pictureBox1,chart1);
+        //    chart1.Series.Clear();  // ← 最初からSeriesが1つあるのでクリアします
+        //    chart1.ChartAreas.Clear();
 
-            chart1.Series.Clear();  // ← 最初からSeriesが1つあるのでクリアします
-            chart1.ChartAreas.Clear();
+        //    //描画先とするImageオブジェクトを作成する
+        //    Bitmap canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+        //    //ImageオブジェクトのGraphicsオブジェクトを作成する
+        //    Graphics g = Graphics.FromImage(canvas);
 
-            //描画先とするImageオブジェクトを作成する
-            Bitmap canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            //ImageオブジェクトのGraphicsオブジェクトを作成する
-            Graphics g = Graphics.FromImage(canvas);
-
-            //0
-            //0
-            //227
-            //4
-            //5
-            //0
-            //14
-            //5
-            //0
-            //179
-            //90.01649
-            //93
-
-            PointF[] p = {
+        //    PointF[] p = {
                 
-            new PointF(0, 0),   // start point of first spline
-            new PointF(0,0+(227/92)/3),    // first control point of first spline
+        //    new PointF(0, 0),   // start point of first spline
+        //    new PointF(0,0+(227/92)/3),    // first control point of first spline
 
-            new PointF(4-(4/3),5),    // second control point of first spline
-            new PointF(4,5),    // endpoint of first spline and
-            new PointF(4+(4/3),5),   // first control point of second spline
-
-
-            new PointF(14-(14/3),5),    // second control point of first spline
-            new PointF(14,5),    // endpoint of first spline and
-                                // start point of second spline
-            new PointF(14+(14/3),5 ),   // first control point of second spline
+        //    new PointF(4-(4/3),5),    // second control point of first spline
+        //    new PointF(4,5),    // endpoint of first spline and
+        //    new PointF(4+(4/3),5),   // first control point of second spline
 
 
-            new PointF(179-(179/3),91-(93/92)/3),  // second control point of second spline
-            new PointF(179, 91)};  // endpoint of second spline
+        //    new PointF(14-(14/3),5),    // second control point of first spline
+        //    new PointF(14,5),    // endpoint of first spline and
+        //                        // start point of second spline
+        //    new PointF(14+(14/3),5 ),   // first control point of second spline
 
-            Pen penB = new Pen(Color.Blue, 1);
-            Pen penR = new Pen(Color.Red, 3);
+
+        //    new PointF(179-(179/3),91-(93/92)/3),  // second control point of second spline
+        //    new PointF(179, 91)};  // endpoint of second spline
+
+        //    Pen penB = new Pen(Color.Blue, 1);
+        //    Pen penR = new Pen(Color.Red, 3);
             
-            penR.EndCap = LineCap.ArrowAnchor;
+        //    penR.EndCap = LineCap.ArrowAnchor;
 
             
             
             
-            //g.DrawLine(penR, p[0],p[1]);
-            //g.DrawLine(penR, p[8], p[9]);
-            g.DrawBeziers(penB,p);
+        //    //g.DrawLine(penR, p[0],p[1]);
+        //    //g.DrawLine(penR, p[8], p[9]);
+        //    g.DrawBeziers(penB,p);
              
-            pictureBox1.Image = canvas;
-            //pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+        //    pictureBox1.Image = canvas;
+        //    //pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
-            Bitmap bmp = new Bitmap(
-        canvas,
-        canvas.Width*2,
-        canvas.Height);
+        //    Bitmap bmp = new Bitmap(
+        //canvas,
+        //canvas.Width*2,
+        //canvas.Height);
 
-            pictureBox1.Image = bmp;
-            pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            // ChartにChartAreaを追加します
-            string chart_area1 = "Area1";
-            var ch1= chart1.ChartAreas.Add((chart_area1));
-            ch1.AxisX.Interval = 10;
-            ch1.AxisY.Interval = 10;
-            // ChartにSeriesを追加します
-            string legend1 = "Graph1";
-            chart1.Series.Add(legend1);
-            // グラフの種別を指定
-            chart1.Series[legend1].ChartType = SeriesChartType.Spline; // 折れ線グラフを指定してみます
+        //    pictureBox1.Image = bmp;
+        //    pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+        //    //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+        //    // ChartにChartAreaを追加します
+        //    string chart_area1 = "Area1";
+        //    var ch1= chart1.ChartAreas.Add((chart_area1));
+        //    ch1.AxisX.Interval = 10;
+        //    ch1.AxisY.Interval = 10;
+        //    // ChartにSeriesを追加します
+        //    string legend1 = "Graph1";
+        //    chart1.Series.Add(legend1);
+        //    // グラフの種別を指定
+        //    chart1.Series[legend1].ChartType = SeriesChartType.Spline; // 折れ線グラフを指定してみます
             
-            chart1.Series[legend1].SetCustomProperty("LineTension", "0.1");
+        //    chart1.Series[legend1].SetCustomProperty("LineTension", "0.1");
             
-            chart1.BorderlineWidth = 10;
-            for (int i = 0; i < p.Length; i++)
-            {
+        //    chart1.BorderlineWidth = 10;
+        //    for (int i = 0; i < p.Length; i++)
+        //    {
                 
                 
-                chart1.Series[legend1].Points.AddXY(p[i].X,p[i].Y);
-            }
+        //        chart1.Series[legend1].Points.AddXY(p[i].X,p[i].Y);
+        //    }
 
             
         }

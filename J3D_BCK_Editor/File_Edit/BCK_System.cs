@@ -19,19 +19,20 @@ namespace J3D_BCK_Editor.File_Edit
             debug.AppendText(EN.NewLine + debugstr[debugnum] + EN.NewLine);
             debugnum++;
         }
+        /// <summary>
+        /// BCKファイルからアニメーションテーブルを読み込みます<br/>
+        /// <remarks>Animation_Table_File_Reader(バイナリリード)</remarks>
+        /// </summary>
+        /// 
         public void Animation_Table_File_Reader(BinaryReader br)
         {
-
             string[] xyzstate = { "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" };
-            for (int i = 0; i < Bone_Num; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    dgv1.Rows.Add("Bone" + i, xyzstate[j], CS.Byte2Int(br, 2), CS.Byte2Int(br, 2), CS.Byte2Int(br, 2));
+                for (int i = 0; i < Bone_Num; i++){
+                    for (int j = 0; j < 9; j++){
+                        dgv1.Rows.Add("Bone" + i, xyzstate[j], CS.Byte2Int(br, 2), CS.Byte2Int(br, 2), CS.Byte2Int(br, 2));
+                    }
                 }
-            }
-
-
+            
         }
         public void Padding(BinaryReader br)
         {
@@ -125,9 +126,11 @@ namespace J3D_BCK_Editor.File_Edit
         /// ﾀｲﾌﾟﾅﾝﾊﾞｰ：0 ｽｹｰﾙ :1 ﾛｰﾃｰｼｮﾝ :3 ﾄﾗﾝｽﾚｰｼｮﾝ
         /// </summary>
         /// 
-        public void Mode_Checker(int bones , int type_num　, bool dgv_write) 
+        public void Mode_Checker(int bones , int type_num　, bool dgv_write ,bool plot_reader = false) 
         {
-            
+            rotList_Num = new int[bones*9];
+            rotList_Start = new int[bones * 9];
+            rotList_Tangent = new int[bones * 9];
             for (int c = type_num; (bones * 9) > c; c = c + 3)
             {
                 Frame_Num_String = dgv1.Rows[c].Cells["Frame_Num"].Value.ToString();
@@ -140,7 +143,14 @@ namespace J3D_BCK_Editor.File_Edit
                 {
                     debug.AppendText(EN.NewLine+ "Rot_" + Start_Frame_String + "__" + Frame_Num_String + "__" + Tangent_String);
                     bool write_read = dgv_write;
-                    Rot_Mode(write_read);
+                    if (plot_reader == false) { Rot_Mode(write_read); }
+                    else
+                    {
+                        rotList_Num[c] = Frame_Num_Int;
+                        rotList_Start[c] = Start_Frame_Int;
+                        rotList_Tangent[c] = Tangent_Int;
+                        
+                    }
                 }
                 else if (type_num == 0)
                 {
@@ -164,6 +174,27 @@ namespace J3D_BCK_Editor.File_Edit
                 {
                     Scale_Trans_Mode(dgv_write, dgv4, "Translation_Value");
                 }
+            }
+            if (plot_reader == true) 
+            {
+                //rotList_Num = rotList_Num.Where(x => x != 0).ToArray();
+                //rotList_Num = rotList_Num.Where(x => x != 1).ToArray();
+                int rc = 0;
+                foreach (var y in rotList_Num.Select((value, index) => new { value, index })) {
+                    if ((y.value != 0)&& (y.value > 0)) {
+                        
+                        debug.AppendText(EN.NewLine + rotList_Start[y.index].ToString() + "__start");
+                        debug.AppendText(EN.NewLine + rotList_Num[y.index].ToString() + "__Num");
+                        debug.AppendText(EN.NewLine+rotList_Tangent[y.index].ToString()+"__tan");
+                        Plot_List_Rot_Combo.Add(new List<int>());
+                        Plot_List_Rot_Combo[rc].Add(rotList_Start[y.index]);
+                        Plot_List_Rot_Combo[rc].Add(rotList_Num[y.index]);
+                        Plot_List_Rot_Combo[rc].Add(rotList_Tangent[y.index]);
+                        debug.AppendText(EN.NewLine + string.Join(", ", Plot_List_Rot_Combo[rc][0])+"生成値");
+                        rc++;   
+                    }
+                }
+                
             }
         }
         public void Rot_Mode(bool dgv_write) 

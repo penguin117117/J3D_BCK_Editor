@@ -9,6 +9,7 @@ using System.Globalization;
 using CS = J3D_BCK_Editor.File_Edit.Calculation_System;
 using EN = System.Environment;
 
+
 namespace J3D_BCK_Editor.File_Edit
 {
 
@@ -128,17 +129,23 @@ namespace J3D_BCK_Editor.File_Edit
         /// 
         public void Mode_Checker(int bones , int type_num　, bool dgv_write ,bool plot_reader = false) 
         {
+            com1.Items.Clear();
             rotList_Num = new int[bones*9];
             rotList_Start = new int[bones * 9];
             rotList_Tangent = new int[bones * 9];
+
+            string Bone_Num_And_XYZ = "";
             for (int c = type_num; (bones * 9) > c; c = c + 3)
             {
+                Bone_Num_And_XYZ = (dgv1.Rows[c].Cells["BoneNum"].Value.ToString()+"_"+ dgv1.Rows[c].Cells["XYZ_State"].Value.ToString());
+
                 Frame_Num_String = dgv1.Rows[c].Cells["Frame_Num"].Value.ToString();
                 Start_Frame_String = dgv1.Rows[c].Cells["Start_Frame"].Value.ToString();
                 Tangent_String = dgv1.Rows[c].Cells["Tangent_Mode"].Value.ToString();
                 Frame_Num_Int = Convert.ToInt32(Frame_Num_String);
                 Start_Frame_Int = Convert.ToInt32(Start_Frame_String);
                 Tangent_Int = Convert.ToInt32(Tangent_String);
+                com1.Items.Add(Bone_Num_And_XYZ);
                 if (type_num == 1)
                 {
                     debug.AppendText(EN.NewLine+ "Rot_" + Start_Frame_String + "__" + Frame_Num_String + "__" + Tangent_String);
@@ -207,7 +214,7 @@ namespace J3D_BCK_Editor.File_Edit
             float dgv3float;
             if (Tangent_String == "0" && Frame_Num_String == "1")
             {
-                rotList[Start_Frame_Int] = Start_Frame_Int + 1;
+                rotList[Start_Frame_Int] = Start_Frame_Int ;
 
                 //rotList_Num[Start_Frame_Int] = Frame_Num_Int;
                 //rotList_Start[Start_Frame_Int] =Start_Frame_Int;
@@ -218,7 +225,7 @@ namespace J3D_BCK_Editor.File_Edit
                 //rotList_Num[Start_Frame_Int] = Frame_Num_Int;
                 //rotList_Start[Start_Frame_Int] = Start_Frame_Int;
                 //rotList_Tangent[Start_Frame_Int] = Tangent_Int;
-                for (int i = (Start_Frame_Int + 1); (Start_Frame_Int + 1) + (Frame_Num_Int * 3) > i; i = i + 3)
+                for (int i = (Start_Frame_Int +1); (Start_Frame_Int +1) + (Frame_Num_Int * 3) > i; i = i + 3)
                 {
                     rotList[i] = i;
                     
@@ -234,13 +241,13 @@ namespace J3D_BCK_Editor.File_Edit
                     rotList[j] = j;
                 }
             }
-            rotList = rotList.Where(x => x != 0).ToArray();
+            //rotList = rotList.Where(x => x != 0).ToArray();
             //rotList_Num = rotList_Num.Where(x => ((x != 0) && (x != 1))).ToArray();
             //rotList_Tangent = rotList_Tangent.Where(x => ((rotList_Num[x] != 0) && (rotList_Num[x] != 1))).ToArray();
             //rotList_Start = rotList_Start.Where(x => ((rotList_Num[x] != 0) && (rotList_Num[x] != 1))).ToArray();
             //rotList_Num = rotList_Num.Where(x => ((x != 0) && (x != 1))).ToArray();
 
-            //debug.AppendText("_______"+ rotList_Num.Length);
+            debug.AppendText("_______"+ rotList_Num.Length);
             int frac = 1;
             
             for (int f = 0; f < Rotation_Frac;f++) 

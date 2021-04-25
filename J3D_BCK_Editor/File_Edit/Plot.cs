@@ -24,55 +24,120 @@ namespace J3D_BCK_Editor.File_Edit
             Bitmap canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             //ImageオブジェクトのGraphicsオブジェクトを作成する
             Graphics g = Graphics.FromImage(canvas);
-            int pl_sfn,pl_cfn,pl_tan;
-            pl_sfn = Plot_List_Rot_Combo[3][0];
-            pl_cfn = Plot_List_Rot_Combo[3][1];
-            pl_tan = Plot_List_Rot_Combo[3][2];
+            int pl_sfn,pl_cfn,pl_tan, pl_tan2;
+            pl_sfn = Plot_List_Rot_Combo[com1.SelectedIndex][0];
+            pl_cfn = Plot_List_Rot_Combo[com1.SelectedIndex][1];
+            pl_tan = Plot_List_Rot_Combo[com1.SelectedIndex][2];
+            Console.WriteLine(pl_sfn + "_" + pl_cfn + "_" + pl_tan);
+            int dgv3_fn;
+            float dgv3_va, dgv3_ta, dgv3_ta2;
 
-            Console.WriteLine(pl_sfn+"_"+pl_cfn+"_"+pl_tan);
-            int dgv3_fn ,dgv3_ta;
-            float dgv3_va;
+
+            Pen penB = new Pen(Color.Blue, 1);
+            Pen penR = new Pen(Color.Red, 3);
+
+            penR.EndCap = LineCap.ArrowAnchor;
+            if (pl_cfn == 1) 
+            {
+                float lineF = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[pl_sfn].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                PointF p_line = new PointF(0,lineF);
+                PointF p_line2 = new PointF(Int32.Parse(Txt_Total_Frame.Text),lineF);
+                g.ResetTransform();
+                //ワールド変換行列を下に10平行移動する
+                g.TranslateTransform(0, canvas.Height / 2);
+                g.ScaleTransform(3F, 0.5F);
+                g.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text), 0));
+                g.DrawLine(penB,p_line,p_line2);
+                
+                pictureBox1.Image = canvas;
+                //pictureBox1.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
+                pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                return;
+            }
+            //pl_tan2 = Plot_List_Rot_Combo[com1.SelectedIndex][3];
+            
             PointF[] p = { };
             List<PointF> l2pf = new List<PointF>();
             for (int i = pl_sfn; i < pl_sfn + (pl_cfn * (3 + pl_tan)); i += (3 + pl_tan))
             {
-                dgv3_fn = Convert.ToInt32(dgv3.Rows[i].Cells["Rotation_Value"].Value);
+                Console.WriteLine("!_!_!_!_!_!_!_!");
+                dgv3_fn = Convert.ToInt16(dgv3.Rows[i].Cells["Rotation_Value"].Value);
                 dgv3_va =float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i+1].Cells["Rotation_Value"].Value , CultureInfo.InvariantCulture.NumberFormat));
-                dgv3_ta = Convert.ToInt32(dgv3.Rows[i+2].Cells["Rotation_Value"].Value);
+                dgv3_ta = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + 2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
                 PointF p0 =new PointF(dgv3_fn, dgv3_va - (dgv3_ta / 92) / 3);
                 PointF p1 = new PointF(dgv3_fn, dgv3_va);
-                PointF p2 = new PointF(dgv3_fn, dgv3_va + (dgv3_ta / 92) / 3);
-                if (pl_sfn == i)
-                {
-                    l2pf.Add(p1);
-                    l2pf.Add(p2);
-                    Console.WriteLine("F");
-                    p.Append(p1);
-                    p.Append(p2);
+                
+
+                if ((3 + pl_tan) == 3) {
+                    PointF p2 = new PointF(dgv3_fn, dgv3_va + (dgv3_ta / 92) / 3);
+                    if (pl_sfn == i)
+                    {
+                        l2pf.Add(p1);
+                        l2pf.Add(p2);
+                        Console.WriteLine("F");
+                        p.Append(p1);
+                        p.Append(p2);
+                    }
+                    else if (pl_sfn + (pl_cfn * (3 + pl_tan)) - 3 > i)
+                    {
+                        l2pf.Add(p0);
+
+                        l2pf.Add(p1);
+                        l2pf.Add(p2);
+
+                        Console.WriteLine("M");
+                        p.Append(p0);
+                        p.Append(p1);
+                        p.Append(p2);
+                    }
+                    else
+                    {
+                        l2pf.Add(p0);
+
+                        l2pf.Add(p1);
+
+                        Console.WriteLine("E");
+                        p.Append(p0);
+                        p.Append(p1);
+                    }
                 }
-                else if (pl_sfn + (pl_cfn * (3 + pl_tan))-3 > i)
+                else if ((3 + pl_tan)==4) 
                 {
-                    l2pf.Add(p0);
                     
-                    l2pf.Add(p1);
-                    l2pf.Add(p2);
+                    dgv3_ta2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + 3].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                    PointF p2 = new PointF(dgv3_fn, dgv3_va + (dgv3_ta2 / 92) / 3);
+                    if (pl_sfn == i)
+                    {
+                        l2pf.Add(p1);
+                        l2pf.Add(p2);
+                        Console.WriteLine("F");
+                        p.Append(p1);
+                        p.Append(p2);
+                    }
+                    else if (pl_sfn + (pl_cfn * (3 + pl_tan)) - 4 > i)
+                    {
+                        l2pf.Add(p0);
 
-                    Console.WriteLine("M");
-                    p.Append(p0);
-                    p.Append(p1);
-                    p.Append(p2);
+                        l2pf.Add(p1);
+                        l2pf.Add(p2);
+
+                        Console.WriteLine("M");
+                        p.Append(p0);
+                        p.Append(p1);
+                        p.Append(p2);
+                    }
+                    else
+                    {
+                        l2pf.Add(p0);
+
+                        l2pf.Add(p1);
+
+                        Console.WriteLine("E");
+                        p.Append(p0);
+                        p.Append(p1);
+                    }
+
                 }
-                else 
-                {
-                    l2pf.Add(p0);
-
-                    l2pf.Add(p1);
-
-                    Console.WriteLine("E");
-                    p.Append(p0);
-                    p.Append(p1);
-                }
-
 
                 
 
@@ -104,10 +169,7 @@ namespace J3D_BCK_Editor.File_Edit
             //new PointF(179-(179/3),91-(93/92)/3),  // second control point of second spline
             //new PointF(179, 91)};  // endpoint of second spline
 
-            Pen penB = new Pen(Color.Blue, 1);
-            Pen penR = new Pen(Color.Red, 3);
-
-            penR.EndCap = LineCap.ArrowAnchor;
+            
 
 
             PointF[] point2 = l2pf.ToArray();
@@ -120,18 +182,20 @@ namespace J3D_BCK_Editor.File_Edit
             g.ScaleTransform(2F, 1F);
             //g.RotateTransform(180F);
             //フォントオブジェクトの作成
-            Font fnt = new Font("MS UI Gothic", 8);
+            //Font fnt = new Font("MS UI Gothic", 8);
             //文字列を位置(0,0)、青色で表示
-            
-            g.DrawLine(penR,new PointF(0,0),new PointF(Int32.Parse(Txt_Total_Frame.Text),0));
-            
+
+            g.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text), 0));
+
             g.DrawBeziers(penB, point2);
             
-            g.DrawString("(0,0)", fnt, Brushes.Blue, 0, 0);
-            g.DrawString("(0,"+ Int32.Parse(Txt_Total_Frame.Text) + ")".ToString(), fnt, Brushes.Blue, Int32.Parse(Txt_Total_Frame.Text),0 );
+            //g.DrawString("(0,0)", fnt, Brushes.Blue, 0, 0);
+            //g.DrawString("(0,"+ Int32.Parse(Txt_Total_Frame.Text) + ")".ToString(), fnt, Brushes.Blue, Int32.Parse(Txt_Total_Frame.Text),0 );
             pictureBox1.Image = canvas;
-            pictureBox1.Image.RotateFlip(RotateFlipType.Rotate180FlipXY);
+            //pictureBox1.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
+            pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
             
+
             //    Bitmap bmp = new Bitmap(
             //canvas,
             //canvas.Width*2,
@@ -162,7 +226,7 @@ namespace J3D_BCK_Editor.File_Edit
             //////}
 
 
-        } 
+        }
     }
 
     }

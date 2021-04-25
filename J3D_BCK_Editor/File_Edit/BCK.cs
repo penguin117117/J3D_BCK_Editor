@@ -7,7 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Collections.Generic;
-
+using EN = System.Environment;
 using CS = J3D_BCK_Editor.File_Edit.Calculation_System;
 
 namespace J3D_BCK_Editor.File_Edit
@@ -24,6 +24,7 @@ namespace J3D_BCK_Editor.File_Edit
         public static DataGridView dgv3 = Form1.Form1Instance.dataGridView3;
         public static DataGridView dgv4 = Form1.Form1Instance.dataGridView4;
         public static PictureBox pic1 = Form1.Form1Instance.pictureBox1;
+        public static ComboBox com1 = Form1.Form1Instance.comboBox1;
 
         public static List<string> Anim_scale_str = new List<string>();
         public static List<string> Anim_rotation_str = new List<string>();
@@ -207,8 +208,8 @@ namespace J3D_BCK_Editor.File_Edit
 
                 
 
-                dgv3.Rows.Add(l, string.Format("{0:}", CS.Byte2Short_noPI(br)));
-
+                dgv3.Rows.Add(l, string.Format("{0}", CS.Byte2Short_noPI(br)));
+                //debug.AppendText(EN.NewLine + "_?_?_?_"+ string.Format("{0}", CS.Byte2Short_noPI(br)));
 
             }
             bcksys.Mode_Checker(Bone_Num,1,true);
@@ -268,7 +269,7 @@ namespace J3D_BCK_Editor.File_Edit
             //{
 
             //}
-
+            
 
 
             Console.WriteLine(padnum);

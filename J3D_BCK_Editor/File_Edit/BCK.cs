@@ -25,6 +25,7 @@ namespace J3D_BCK_Editor.File_Edit
         public static DataGridView dgv4 = Form1.Form1Instance.dataGridView4;
         public static PictureBox pic1 = Form1.Form1Instance.pictureBox1;
         public static ComboBox com1 = Form1.Form1Instance.comboBox1;
+        public static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
 
         public static List<string> Anim_scale_str = new List<string>();
         public static List<string> Anim_rotation_str = new List<string>();
@@ -369,8 +370,8 @@ namespace J3D_BCK_Editor.File_Edit
 
             //bcksys.Mode_Checker(Bone_Num, 2, false);
             int trans_pos = Convert.ToInt32(fs.Position);
-            //bcksys.Scale_Trans_Writer(bw, dgv4, "Translation_Value");
-            bcksys.Mode_Checker(Bone_Num, 2, true);
+            bcksys.Scale_Trans_Writer(bw, dgv4, "Translation_Value");
+            //bcksys.Mode_Checker(Bone_Num, 2, true);
 
             fs_pos = fs.Position;
             bcksys.Padding_Writer(bw, fs_pos);

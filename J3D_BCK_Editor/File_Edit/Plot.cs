@@ -52,6 +52,7 @@ namespace J3D_BCK_Editor.File_Edit
                 pictureBox1.Image = canvas;
                 //pictureBox1.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
                 pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                tssl2.Text = com1.Text +"を描画しました。";
                 return;
             }
             //pl_tan2 = Plot_List_Rot_Combo[com1.SelectedIndex][3];
@@ -194,8 +195,8 @@ namespace J3D_BCK_Editor.File_Edit
             pictureBox1.Image = canvas;
             //pictureBox1.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
             pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            
 
+            tssl2.Text = com1.Text + "を描画しました。";
             //    Bitmap bmp = new Bitmap(
             //canvas,
             //canvas.Width*2,

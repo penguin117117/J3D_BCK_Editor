@@ -29,32 +29,22 @@ namespace J3D_BCK_Editor.File_Edit
             Console.WriteLine(str);
             int num = Convert.ToInt32(str,16);
             byte[] bytenum = BitConverter.GetBytes(num);
-            ////return Single.Parse(BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'),NumberStyles.Float);
             return BitConverter.ToSingle(bytenum, 0);
-            ////return float.Parse(BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'), NumberStyles.Float);
-            ////return float.Parse();
-            ////return float.Parse(BitConverter.ToString(bytenum, 0));
         }
 
         public static short Byte2Short_noPI(BinaryReader br) 
         {
             string str = BitConverter.ToString(br.ReadBytes(2)).Replace("-", "").PadLeft(4, '0');
             var i = Convert.ToInt16(str, 16);
-            //var i = Convert.ToInt16(str, 16);
-            //float j = i / 182;
             return Convert.ToInt16(i);
         }
 
         public static short Byte2Short(BinaryReader br)
         {
-            //string str = BitConverter.ToString(br.ReadBytes(2)).Replace("-", "").PadLeft(4, '0');
-            //var i = Convert.ToInt16(str, 16);
-            //Console.WriteLine("int32" + i);
             var i = br.ReadInt16();
             float j = i / 182;
             Console.WriteLine("float" + j);
             return Convert.ToInt16(j);
-            //return i;
         }
 
         public static byte[] StringToBytes(string str)
@@ -63,7 +53,6 @@ namespace J3D_BCK_Editor.File_Edit
             for (int i = 0; i < str.Length / 2; i++)
             {
                 bs.Add(Convert.ToByte(str.Substring(i*2, 2), 16));
-                debug.AppendText(Convert.ToByte(bs[i]).ToString());
             }
             return bs.ToArray();
         }
@@ -73,9 +62,7 @@ namespace J3D_BCK_Editor.File_Edit
             short sh;
             string str2;
             sh = Convert.ToInt16(str,10);
-            debug.AppendText(EN.NewLine + sh.ToString("X2"));
             str2 = sh.ToString("X4");
-            debug.AppendText(EN.NewLine + str2);
             return StringToBytes(str2);
             
         }
@@ -85,9 +72,7 @@ namespace J3D_BCK_Editor.File_Edit
             byte bit;
             string str2;
             bit = Convert.ToByte(str, 10);
-            debug.AppendText(EN.NewLine + bit.ToString());
             str2 = bit.ToString("X2");
-            debug.AppendText(EN.NewLine + str2);
             return StringToBytes(str2);
 
         }
@@ -106,12 +91,7 @@ namespace J3D_BCK_Editor.File_Edit
             var j = Convert.ToSingle(f);
 
             var bytes = BitConverter.GetBytes(j);
-            //var i = BitConverter.ToString(bytes);
-
             var i = BitConverter.ToInt32(bytes, 0);
-            //var i = Int32.Parse(BitConverter.ToString(bytes, 0).Replace("-",""), NumberStyles.AllowHexSpecifier);
-            //var i = BitConverter.ToUInt32(bytes, 0);
-
             return i.ToString("X8");
         }
 
@@ -119,23 +99,18 @@ namespace J3D_BCK_Editor.File_Edit
         {
             var j = Convert.ToInt16(sh);
             var bytes = BitConverter.GetBytes(j);
-            //var i = BitConverter.ToInt32(bytes, 0);
             var i = BitConverter.ToInt16(bytes, 0);
-
             return i.ToString("X4");
         }
 
 
-        public static float hex2float(BinaryReader br, int readbyte = 4) {
-
-            
-            //string str = string.Format("{0:}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'));
+        public static float hex2float(BinaryReader br, int readbyte = 4) 
+        {
             string str = string.Format("{0:f3}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", ""));
             string hexString = str;
             uint num = uint.Parse(hexString, NumberStyles.AllowHexSpecifier);
             byte[] floatVals = BitConverter.GetBytes(num);
             float f = BitConverter.ToSingle(floatVals, 0);
-            Console.WriteLine("float convert = {0:f6}", f);
             return  f;
         }
 
@@ -145,22 +120,15 @@ namespace J3D_BCK_Editor.File_Edit
             string hexString = str;
             float f;
             f = Convert.ToSingle(Int32.Parse(str, NumberStyles.HexNumber));
-            //uint num = uint.Parse(hexString,NumberStyles.HexNumber);
-            //byte[] floatVals = BitConverter.GetBytes(num);
-            //float f = BitConverter.ToSingle(floatVals, 0);
-            //Console.WriteLine("float convert = {0:f6}", f);
             return f;
         }
 
 
         public static int hex2int(BinaryReader br, int readbyte = 4)
         {
-
-            //string str = string.Format("{0:}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'));
             string str = string.Format("{0:X}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", ""));
             string hexString = str;
             return Int32.Parse(hexString, NumberStyles.AllowHexSpecifier);
-            
         }
 
         public static byte[] ToHexString(string str)
@@ -168,7 +136,6 @@ namespace J3D_BCK_Editor.File_Edit
             var f = float.Parse(str);
             var bytes = BitConverter.GetBytes(f);
             var i = BitConverter.ToInt32(bytes, 0);
-            Console.WriteLine("str→byte_"+ "0x" + i.ToString("X8"));
             return bytes;
         }
 
@@ -178,23 +145,7 @@ namespace J3D_BCK_Editor.File_Edit
             var b = br.ReadBytes(4);
             var b2 = b.Reverse().ToArray();
             float i = BitConverter.ToSingle(b2,0);
-            Console.WriteLine("Binary→Float_" + i.ToString());
             return i;
         }
-
-
-        //public static byte[] FloatString2Bytes(string str) 
-        //{
-        //    List<byte[]> bit= new List<byte[]>() ;
-        //    float.Parse(str);
-        //    int bitnum = 0;
-        //    foreach (byte bit2 in str) 
-        //    {
-        //        bit.Add(bit2);
-        //        bitnum++;
-        //    }
-        //    return bit;
-        //}
-
     }
 }

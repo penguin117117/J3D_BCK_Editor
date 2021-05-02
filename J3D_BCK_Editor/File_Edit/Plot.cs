@@ -24,20 +24,28 @@ namespace J3D_BCK_Editor.File_Edit
             PointF p_line, p_line2,p0,p1,p2;
 
             //描画先とするImageオブジェクトを作成する
-            Bitmap canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Bitmap canvas = new Bitmap(pictureBox1.ClientRectangle.Width, pictureBox1.ClientRectangle.Height);
             
             //ImageオブジェクトのGraphicsオブジェクトを作成する
             Graphics g = Graphics.FromImage(canvas);
+
+            //g.Clear(Color.Transparent);
             
             //ペンの設定
             Pen penB = new Pen(Color.Blue, 1);
-            Pen penR = new Pen(Color.Red, 3);
+            Pen penR = new Pen(Color.Red, 2);
+            Pen penG = new Pen(Color.Green, 2);
             penR.EndCap = LineCap.ArrowAnchor;
+            penG.EndCap = LineCap.ArrowAnchor;
 
             //初期化
             pl_sfn = Plot_List_Rot_Combo[com1.SelectedIndex][0];
             pl_cfn = Plot_List_Rot_Combo[com1.SelectedIndex][1];
             pl_tan = Plot_List_Rot_Combo[com1.SelectedIndex][2];
+            
+
+
+
             List<PointF> l2pf = new List<PointF>();
 
             //デバッグ
@@ -54,12 +62,12 @@ namespace J3D_BCK_Editor.File_Edit
                 //ワールド設定
                 g.ResetTransform();
                 g.TranslateTransform(0, canvas.Height / 2);
-                g.ScaleTransform(3F, 0.5F);
+                //g.ScaleTransform(3F, 0.1F);
 
                 //線を描画
                 g.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text), 0));
                 g.DrawLine(penB,p_line,p_line2);
-
+                
                 //イメージをピクチャボックスに
                 pictureBox1.Image = canvas;
                 pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -72,17 +80,43 @@ namespace J3D_BCK_Editor.File_Edit
             //曲線のあるパターン(エルミート曲線)
             for (int i = pl_sfn; i < pl_sfn + (pl_cfn * (3 + pl_tan)); i += (3 + pl_tan))
             {
+                float dgv3_fn2 = 0;
+                float dgv3_va2 = 0;
+                float dgv3_ta_2 = 0;
+                float dgv3_fn0 = 0;
+                float dgv3_va_0 = 0;
+                float dgv3_ta_0 = 0;
                 //初期化
                 dgv3_fn = Convert.ToInt16(dgv3.Rows[i].Cells["Rotation_Value"].Value);
+
+                dgv3_fn2 = dgv3_fn;
+                if (dgv3.RowCount < i + (3 + pl_tan))
+                {
+                    dgv3_fn2 = Convert.ToInt16(dgv3.Rows[i + (3 + pl_tan)].Cells["Rotation_Value"].Value);
+                    dgv3_va2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + (3 + pl_tan) + 1].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                    dgv3_ta_2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + (3 + pl_tan) + 2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                }
+
+                if (pl_sfn + (3 + pl_tan) < i )
+
+                {
+                    Console.WriteLine(i - (3 + pl_tan));
+                    Console.WriteLine(dgv3.Rows[i - (3 + pl_tan)].Cells["Rotation_Value"].Value);
+                    dgv3_fn0 = Convert.ToInt16(dgv3.Rows[i - (3 + pl_tan)].Cells["Rotation_Value"].Value);
+                    dgv3_va_0 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i  - (3 + pl_tan)+1].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                    dgv3_ta_0 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i - (3 + pl_tan)+2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                }
                 dgv3_va =float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i+1].Cells["Rotation_Value"].Value , CultureInfo.InvariantCulture.NumberFormat));
                 dgv3_ta = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + 2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
-                p0 =new PointF(dgv3_fn, dgv3_va - (dgv3_ta / 92) / 3);
+                p0 = new PointF(dgv3_fn - Math.Abs(dgv3_fn0-dgv3_fn)/3, dgv3_va - ((dgv3_ta/92)*((dgv3_fn - Math.Abs(dgv3_fn0 - dgv3_fn) / 3)) ) / 3);
+                //p0 = new PointF(dgv3_fn - Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_fn - Math.Abs(dgv3_fn2 - dgv3_fn) / 3 * (dgv3_ta/92)/3 );
                 p1 = new PointF(dgv3_fn, dgv3_va);
                 
                 //ﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞなし
                 if ((3 + pl_tan) == 3) {
                     //タンジェントモード「なし」のポイント設定&初期化
-                    p2 = new PointF(dgv3_fn, dgv3_va + (dgv3_ta / 92) / 3);
+                    p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn)/3, dgv3_va + ((dgv3_ta/92)*((dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3)) ) / 3);
+                    //p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3 * (dgv3_ta/92)/3 );
 
                     //先頭と末尾だけポイント数を減らす
                     if (pl_sfn == i)
@@ -110,7 +144,8 @@ namespace J3D_BCK_Editor.File_Edit
                 {
                     //タンジェントモード「あり」のポイント設定&初期化
                     dgv3_ta2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + 3].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
-                    p2 = new PointF(dgv3_fn, dgv3_va + (dgv3_ta2 / 92) / 3);
+                    p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_va + ((dgv3_ta2 / 92)*(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3)) / 3);
+                    //p2 = new PointF(dgv3_fn, (dgv3_ta2 / 92) *3);
 
                     //先頭と末尾だけポイント数を減らす
                     if (pl_sfn == i)
@@ -147,16 +182,31 @@ namespace J3D_BCK_Editor.File_Edit
             //ワールド設定
             g.ResetTransform();
             g.TranslateTransform(0, canvas.Height /2);
-            g.ScaleTransform(2F, 1F);
+            //g.ScaleTransform(2F, 2F);
             
+            
+            
+            
+            Bitmap canvas2 = new Bitmap(Frame_Num+20,360+20) ;
+            Graphics g2 = Graphics.FromImage(canvas2);
+            g2.Clear(Color.Transparent);
             //描画
-            g.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text), 0));
-            g.DrawBeziers(penB, point2);
+            g2.TranslateTransform(0, canvas2.Height / 2);
+            g2.DrawLine(penG, new PointF(0, -180), new PointF(0,180));
+            g2.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text), 0));
+            g2.DrawBeziers(penB, point2);
             
             //ピクチャボックスに表示
-            pictureBox1.Image = canvas;
+            pictureBox1.Image = canvas2;
             pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+
+
+            g.Dispose();
+            g2.Dispose();
             
+            
+
             //ステータスバーの設定
             tssl2.Text = com1.Text + "を描画しました。";
         }

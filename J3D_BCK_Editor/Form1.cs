@@ -161,6 +161,9 @@ namespace J3D_BCK_Editor
             }
             Plot pt = new Plot();
             pt.Draw(pictureBox1);
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            
+            
         }
     }
 }

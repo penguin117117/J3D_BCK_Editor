@@ -78,6 +78,8 @@ namespace J3D_BCK_Editor
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.デバッグ = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -92,6 +94,8 @@ namespace J3D_BCK_Editor
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -100,7 +104,7 @@ namespace J3D_BCK_Editor
             this.ファイルToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(909, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(913, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -132,9 +136,9 @@ namespace J3D_BCK_Editor
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 520);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 527);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(909, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(913, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -242,6 +246,7 @@ namespace J3D_BCK_Editor
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(176, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -497,9 +502,9 @@ namespace J3D_BCK_Editor
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.panel1);
             this.tabPage5.Controls.Add(this.comboBox1);
             this.tabPage5.Controls.Add(this.button1);
-            this.tabPage5.Controls.Add(this.pictureBox1);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -532,9 +537,10 @@ namespace J3D_BCK_Editor
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(708, 319);
+            this.pictureBox1.Size = new System.Drawing.Size(702, 297);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
@@ -542,21 +548,40 @@ namespace J3D_BCK_Editor
             // 
             this.デバッグ.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.デバッグ.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.デバッグ.Location = new System.Drawing.Point(910, 49);
+            this.デバッグ.Location = new System.Drawing.Point(6, 6);
             this.デバッグ.Multiline = true;
             this.デバッグ.Name = "デバッグ";
             this.デバッグ.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.デバッグ.Size = new System.Drawing.Size(277, 270);
+            this.デバッグ.Size = new System.Drawing.Size(708, 454);
             this.デバッグ.TabIndex = 0;
-            this.デバッグ.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(6, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(708, 319);
+            this.panel1.TabIndex = 6;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.デバッグ);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(720, 466);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "デバッグ";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(909, 542);
+            this.ClientSize = new System.Drawing.Size(913, 549);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.デバッグ);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -581,6 +606,10 @@ namespace J3D_BCK_Editor
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -637,6 +666,8 @@ namespace J3D_BCK_Editor
         public System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabPage tabPage6;
     }
 }
 

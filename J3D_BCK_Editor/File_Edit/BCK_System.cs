@@ -206,7 +206,7 @@ namespace J3D_BCK_Editor.File_Edit
 
             int frac = 1;
             int from_txt_frac= Int32.Parse( Txt_Rot_Frac.Text);
-            for (int f = 0; f <from_txt_frac ;f++) 
+            for (int f = 0; f <0 /*from_txt_frac*/; f++) 
             {
                 if (f!=0) { frac = frac*10; }
             }

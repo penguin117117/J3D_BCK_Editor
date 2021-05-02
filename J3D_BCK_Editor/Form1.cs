@@ -161,9 +161,28 @@ namespace J3D_BCK_Editor
             }
             Plot pt = new Plot();
             pt.Draw(pictureBox1);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            
-            
+            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if ((dataGridView1.Rows.Count == 0) || (dataGridView2.Rows.Count == 0) || (dataGridView3.Rows.Count == 0) || (dataGridView4.Rows.Count == 0))
+            {
+                return;
+            }
+            Plot pt = new Plot();
+            pt.Draw(pictureBox1,float.Parse( textBox1.Text));
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
+
 using EN = System.Environment;
 
 
@@ -15,7 +16,7 @@ namespace J3D_BCK_Editor.File_Edit
 {
     class Plot : BCK_State
     {
-        public void Draw(PictureBox pictureBox1)
+        public void Draw(PictureBox pictureBox1 , float scale = 1)
         {
             //宣言
             int pl_sfn, pl_cfn, pl_tan;
@@ -23,6 +24,8 @@ namespace J3D_BCK_Editor.File_Edit
             float dgv3_va, dgv3_ta, dgv3_ta2, lineF;
             PointF p_line, p_line2,p0,p1,p2;
 
+            float plot_scale = scale;
+            if (0 >= scale) plot_scale = 1;
             //描画先とするImageオブジェクトを作成する
             Bitmap canvas = new Bitmap(pictureBox1.ClientRectangle.Width, pictureBox1.ClientRectangle.Height);
             
@@ -118,11 +121,18 @@ namespace J3D_BCK_Editor.File_Edit
                 p0 = new PointF(dgv3_fn - Math.Abs(dgv3_fn0-dgv3_fn)/3, dgv3_va - ((dgv3_ta/92)*((dgv3_fn - Math.Abs(dgv3_fn0 - dgv3_fn) / 3)) ) / 3);
                 //p0 = new PointF(dgv3_fn - Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_fn - Math.Abs(dgv3_fn2 - dgv3_fn) / 3 * (dgv3_ta/92)/3 );
                 p1 = new PointF(dgv3_fn, dgv3_va);
-                
+
+                p0.X *= plot_scale;
+                p0.Y *= 0.8f;
+                p1.X *= plot_scale;
+                p1.Y *= 0.8f;
+
                 //ﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞなし
                 if ((3 + pl_tan) == 3) {
                     //タンジェントモード「なし」のポイント設定&初期化
                     p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn)/3, dgv3_va + ((dgv3_ta / 92)*((dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3)) ) / 3);
+                    p2.X *= plot_scale;
+                    p2.Y *= 0.8f;
                     //p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3 * (dgv3_ta/92)/3 );
 
                     //先頭と末尾だけポイント数を減らす
@@ -149,9 +159,15 @@ namespace J3D_BCK_Editor.File_Edit
                 //ﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞあり
                 else if ((3 + pl_tan)==4) 
                 {
+                    dgv3_ta2 = 0;
                     //タンジェントモード「あり」のポイント設定&初期化
-                    dgv3_ta2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + 3].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
-                    p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_va + ((dgv3_ta2 / 92)*(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3)) / 3);
+                    if (dgv3.RowCount < i + (3 + pl_tan))
+                    {
+                        dgv3_ta2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + (3 + pl_tan) + 3].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat)) / frac;
+                    }
+                        p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_va + ((dgv3_ta2 / 92)*(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3)) / 3);
+                    p2.X *= plot_scale;
+                    p2.Y *= 0.8f;
                     //p2 = new PointF(dgv3_fn, (dgv3_ta2 / 92) *3);
 
                     //先頭と末尾だけポイント数を減らす
@@ -194,15 +210,22 @@ namespace J3D_BCK_Editor.File_Edit
             
             
             
-            Bitmap canvas2 = new Bitmap(Frame_Num+20,360+20) ;
+            Bitmap canvas2 = new Bitmap(Convert.ToInt32((Frame_Num+20) *plot_scale),Convert.ToInt32 ((360+20)*0.8f)) ;
             Graphics g2 = Graphics.FromImage(canvas2);
             g2.Clear(Color.Transparent);
             //描画
-            g2.TranslateTransform(0, canvas2.Height / 2);
-            g2.DrawLine(penG, new PointF(0, -180), new PointF(0,180));
-            g2.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text), 0));
-            g2.DrawBeziers(penB, point2);
             
+            g2.TranslateTransform(0, canvas2.Height / 2);
+            
+            //g2.ScaleTransform(5F, 5F);
+            g2.DrawLine(penG, new PointF(0, -180*0.8f ), new PointF(0,180 * 0.8f));
+            g2.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text) * plot_scale, 0));
+            g2.DrawLine(penR, new PointF(0, -90 * 0.8f), new PointF(5, -90 * 0.8f));
+            g2.DrawLine(penR, new PointF(0, 90 * 0.8f), new PointF(5, 90 * 0.8f));
+            g2.DrawBeziers(penB, point2);
+
+            //g2.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //g2.DrawImage(canvas2, 0, 0,  canvas2.Width * plot_scale, canvas2.Height * plot_scale);
             //ピクチャボックスに表示
             pictureBox1.Image = canvas2;
             pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);

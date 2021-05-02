@@ -80,6 +80,9 @@ namespace J3D_BCK_Editor
             this.デバッグ = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -502,6 +505,9 @@ namespace J3D_BCK_Editor
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button2);
+            this.tabPage5.Controls.Add(this.label5);
+            this.tabPage5.Controls.Add(this.textBox1);
             this.tabPage5.Controls.Add(this.panel1);
             this.tabPage5.Controls.Add(this.comboBox1);
             this.tabPage5.Controls.Add(this.button1);
@@ -517,7 +523,7 @@ namespace J3D_BCK_Editor
             // 
             this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(373, 331);
+            this.comboBox1.Location = new System.Drawing.Point(361, 345);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(196, 35);
             this.comboBox1.TabIndex = 5;
@@ -526,7 +532,7 @@ namespace J3D_BCK_Editor
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(575, 331);
+            this.button1.Location = new System.Drawing.Point(572, 345);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 35);
             this.button1.TabIndex = 2;
@@ -576,6 +582,35 @@ namespace J3D_BCK_Editor
             this.tabPage6.Text = "デバッグ";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox1.Location = new System.Drawing.Point(8, 346);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 34);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.Text = "1";
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 331);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 12);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "拡大倍率(Float)";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(114, 345);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(136, 35);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -605,6 +640,7 @@ namespace J3D_BCK_Editor
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -668,6 +704,9 @@ namespace J3D_BCK_Editor
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

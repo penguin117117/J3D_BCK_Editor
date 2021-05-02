@@ -204,12 +204,12 @@ namespace J3D_BCK_Editor.File_Edit
                 }
             }
 
-            int frac = 1;
-            int from_txt_frac= Int32.Parse( Txt_Rot_Frac.Text);
-            for (int f = 0; f <0 /*from_txt_frac*/; f++) 
-            {
-                if (f!=0) { frac = frac*10; }
-            }
+            //int frac = 1;
+            //int from_txt_frac= Int32.Parse( Txt_Rot_Frac.Text);
+            //for (int f = 0; f < from_txt_frac; f++) 
+            //{
+            //    if (f!=0) { frac = frac*10; }
+            //}
 
             
             foreach (int a in rotList)
@@ -217,13 +217,15 @@ namespace J3D_BCK_Editor.File_Edit
                 if (dgv_write　== true)
                 {
                     dgv3float = Convert.ToSingle(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
-                    dgv3float = (dgv3float / 182)*frac;
+                    dgv3float = (dgv3float / 182);
                     dgv3.Rows[a].Cells["Rotation_Value"].Value = dgv3float.ToString();
+
+                    
                 }
                 else
                 {
                     dgv3float = float.Parse(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
-                    dgv3float = (dgv3float /frac)*182;
+                    dgv3float = (dgv3float )*182;
                     dgv3.Rows[a].Cells["Rotation_Value"].Value = Convert.ToInt16(dgv3float);
                 }
             }

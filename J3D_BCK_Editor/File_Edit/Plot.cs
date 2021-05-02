@@ -42,9 +42,14 @@ namespace J3D_BCK_Editor.File_Edit
             pl_sfn = Plot_List_Rot_Combo[com1.SelectedIndex][0];
             pl_cfn = Plot_List_Rot_Combo[com1.SelectedIndex][1];
             pl_tan = Plot_List_Rot_Combo[com1.SelectedIndex][2];
-            
 
 
+            int frac = 1;
+            int from_txt_frac = Int32.Parse(Txt_Rot_Frac.Text);
+            for (int f = 0; f < from_txt_frac; f++)
+            {
+                if (f != 0) { frac = frac * 10; }
+            }
 
             List<PointF> l2pf = new List<PointF>();
 
@@ -94,20 +99,22 @@ namespace J3D_BCK_Editor.File_Edit
                 {
                     dgv3_fn2 = Convert.ToInt16(dgv3.Rows[i + (3 + pl_tan)].Cells["Rotation_Value"].Value);
                     dgv3_va2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + (3 + pl_tan) + 1].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
-                    dgv3_ta_2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + (3 + pl_tan) + 2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                    dgv3_ta_2 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + (3 + pl_tan) + 2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat))/frac;
                 }
 
                 if (pl_sfn + (3 + pl_tan) < i )
 
                 {
+                    debug.AppendText((i - (3 + pl_tan)).ToString());
+                    debug.AppendText(dgv3.Rows[i - (3 + pl_tan)].Cells["Rotation_Value"].Value.ToString() + "ほし★");
                     Console.WriteLine(i - (3 + pl_tan));
-                    Console.WriteLine(dgv3.Rows[i - (3 + pl_tan)].Cells["Rotation_Value"].Value);
+                    Console.WriteLine(dgv3.Rows[i - (3 + pl_tan)].Cells["Rotation_Value"].Value+"ほし★");
                     dgv3_fn0 = Convert.ToInt16(dgv3.Rows[i - (3 + pl_tan)].Cells["Rotation_Value"].Value);
                     dgv3_va_0 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i  - (3 + pl_tan)+1].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
-                    dgv3_ta_0 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i - (3 + pl_tan)+2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                    dgv3_ta_0 = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i - (3 + pl_tan)+2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat))/frac;
                 }
                 dgv3_va =float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i+1].Cells["Rotation_Value"].Value , CultureInfo.InvariantCulture.NumberFormat));
-                dgv3_ta = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + 2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
+                dgv3_ta = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[i + 2].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat))/frac;
                 p0 = new PointF(dgv3_fn - Math.Abs(dgv3_fn0-dgv3_fn)/3, dgv3_va - ((dgv3_ta/92)*((dgv3_fn - Math.Abs(dgv3_fn0 - dgv3_fn) / 3)) ) / 3);
                 //p0 = new PointF(dgv3_fn - Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_fn - Math.Abs(dgv3_fn2 - dgv3_fn) / 3 * (dgv3_ta/92)/3 );
                 p1 = new PointF(dgv3_fn, dgv3_va);
@@ -115,7 +122,7 @@ namespace J3D_BCK_Editor.File_Edit
                 //ﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞなし
                 if ((3 + pl_tan) == 3) {
                     //タンジェントモード「なし」のポイント設定&初期化
-                    p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn)/3, dgv3_va + ((dgv3_ta/92)*((dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3)) ) / 3);
+                    p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn)/3, dgv3_va + ((dgv3_ta / 92)*((dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3)) ) / 3);
                     //p2 = new PointF(dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3, dgv3_fn + Math.Abs(dgv3_fn2 - dgv3_fn) / 3 * (dgv3_ta/92)/3 );
 
                     //先頭と末尾だけポイント数を減らす

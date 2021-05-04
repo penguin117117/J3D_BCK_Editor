@@ -27,7 +27,7 @@ namespace J3D_BCK_Editor.File_Edit
             float plot_scale = scale;
             if (0 >= scale) plot_scale = 1;
             //描画先とするImageオブジェクトを作成する
-            Bitmap canvas = new Bitmap(pictureBox1.ClientRectangle.Width, pictureBox1.ClientRectangle.Height);
+            Bitmap canvas = new Bitmap(Convert.ToInt32((Frame_Num) * plot_scale+20), Convert.ToInt32(360 * 0.8f)/*pictureBox1.ClientRectangle.Width, pictureBox1.ClientRectangle.Height*/);
             
             //ImageオブジェクトのGraphicsオブジェクトを作成する
             Graphics g = Graphics.FromImage(canvas);
@@ -66,6 +66,10 @@ namespace J3D_BCK_Editor.File_Edit
                 lineF = float.Parse(string.Format("{0:0.##########}", dgv3.Rows[pl_sfn].Cells["Rotation_Value"].Value, CultureInfo.InvariantCulture.NumberFormat));
                 p_line  = new PointF(0,lineF);
                 p_line2 = new PointF(Int32.Parse(Txt_Total_Frame.Text),lineF);
+                p_line.X *= plot_scale;
+                p_line.Y *= 0.8f;
+                p_line2.X *= plot_scale;
+                p_line2.Y *= 0.8f;
 
                 //ワールド設定
                 g.ResetTransform();
@@ -73,7 +77,7 @@ namespace J3D_BCK_Editor.File_Edit
                 //g.ScaleTransform(3F, 0.1F);
 
                 //線を描画
-                g.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text), 0));
+                g.DrawLine(penR, new PointF(0, 0), new PointF(Int32.Parse(Txt_Total_Frame.Text)*plot_scale, 0));
                 g.DrawLine(penB,p_line,p_line2);
                 
                 //イメージをピクチャボックスに
@@ -210,7 +214,7 @@ namespace J3D_BCK_Editor.File_Edit
             
             
             
-            Bitmap canvas2 = new Bitmap(Convert.ToInt32((Frame_Num+20) *plot_scale),Convert.ToInt32 ((360+20)*0.8f)) ;
+            Bitmap canvas2 = new Bitmap(Convert.ToInt32((Frame_Num) *plot_scale+20),Convert.ToInt32 (360*0.8f)) ;
             Graphics g2 = Graphics.FromImage(canvas2);
             g2.Clear(Color.Transparent);
             //描画

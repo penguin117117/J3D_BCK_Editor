@@ -218,7 +218,7 @@ namespace J3D_BCK_Editor.File_Edit
                 {
                     dgv3float = Convert.ToSingle(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
                     dgv3float = (dgv3float / 182);
-                    dgv3.Rows[a].Cells["Rotation_Value"].Value = dgv3float.ToString();
+                    dgv3.Rows[a].Cells["Rotation_Value"].Value = dgv3float.ToString("0.##########");
 
                     
                 }

@@ -160,7 +160,7 @@ namespace J3D_BCK_Editor
                 return;
             }
             Plot pt = new Plot();
-            pt.Draw(pictureBox1);
+            pt.Draw(pictureBox1, float.Parse(textBox1.Text));
             //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
 
@@ -172,6 +172,7 @@ namespace J3D_BCK_Editor
             {
                 return;
             }
+            if (comboBox1.Text == "選択してください")return ;
             Plot pt = new Plot();
             pt.Draw(pictureBox1,float.Parse( textBox1.Text));
         }

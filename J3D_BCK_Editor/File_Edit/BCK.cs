@@ -113,7 +113,7 @@ namespace J3D_BCK_Editor.File_Edit
             Txt_Bone_Num.Text = Bone_Num.ToString();
             Txt_Rot_Frac.Text = Rotation_Frac.ToString();
             Txt_Total_Frame.Text = Frame_Num.ToString();
-
+            
 
          //☆デバッガー
             //☆j3d

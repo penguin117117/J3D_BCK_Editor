@@ -29,7 +29,7 @@ namespace J3D_BCK_Editor.File_Edit
         protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
         protected static List<string> Anim_scale_str = new List<string>();
         protected static List<string> Anim_rotation_str = new List<string>();
-
+        protected static TextBox txt3 = Form1.Form1Instance.textBox3;
         
         
         //▽宣言

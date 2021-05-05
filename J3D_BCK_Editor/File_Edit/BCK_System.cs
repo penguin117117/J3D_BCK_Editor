@@ -294,7 +294,9 @@ namespace J3D_BCK_Editor.File_Edit
                 }
                 else
                 {
+                    //Debugger.Append(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
                     dgv3float = float.Parse(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
+
                     dgv3float = (dgv3float )*182;
                     dgv3.Rows[a].Cells["Rotation_Value"].Value = Convert.ToInt16(dgv3float);
                 }

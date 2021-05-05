@@ -149,8 +149,10 @@ namespace J3D_BCK_Editor
             }
             //★BCKクラスインスタンス作成
             BCK_System bcksys = new BCK_System();
+            bcksys.Mode_Checker(Int16.Parse(Bone_Num.Text), 0, true, true);
             bcksys.Mode_Checker(Int16.Parse(Bone_Num.Text), 1, true, true);
-            
+            bcksys.Mode_Checker(Int16.Parse(Bone_Num.Text), 2, true, true);
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,6 +161,8 @@ namespace J3D_BCK_Editor
             {
                 return;
             }
+            
+            
             Plot pt = new Plot();
             pt.Draw(pictureBox1,dataGridView2 , "Scale_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
             //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -166,16 +170,7 @@ namespace J3D_BCK_Editor
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if ((dataGridView1.Rows.Count == 0) || (dataGridView2.Rows.Count == 0) || (dataGridView3.Rows.Count == 0) || (dataGridView4.Rows.Count == 0))
-            {
-                return;
-            }
-            if (comboBox1.Text == "選択してください")return ;
-            Plot pt = new Plot();
-            pt.Draw(pictureBox1,dataGridView2, "Scale_Value", float.Parse( textBox1.Text), float.Parse(textBox2.Text));
-        }
+       
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -192,6 +187,8 @@ namespace J3D_BCK_Editor
             {
                 return;
             }
+            
+            
             Plot pt = new Plot();
             pt.Draw(pictureBox1, dataGridView3, "Rotation_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
         }
@@ -202,6 +199,7 @@ namespace J3D_BCK_Editor
             {
                 return;
             }
+            
             Plot pt = new Plot();
             pt.Draw(pictureBox1, dataGridView4, "Translation_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
         }

@@ -17,7 +17,7 @@ namespace J3D_BCK_Editor.File_Edit
     {
         public void protecttest()
         {
-            debug.AppendText(EN.NewLine + debugstr[debugnum] + EN.NewLine);
+            Debugger.Append(EN.NewLine + debugstr[debugnum] + EN.NewLine);
             debugnum++;
         }
         /// <summary>
@@ -47,7 +47,7 @@ namespace J3D_BCK_Editor.File_Edit
             {
                 ps += CS.Byte2Char(br, 1);
             }
-            debug.AppendText(EN.NewLine + ps);
+            Debugger.Append(EN.NewLine + ps);
         }
 
 
@@ -123,31 +123,41 @@ namespace J3D_BCK_Editor.File_Edit
         /// ｱﾆﾒｰｼｮﾝﾃｰﾌﾞﾙのﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞなどをチェック
         /// <remarks>Mode_Checker(ﾎﾞｰﾝ数、ﾀｲﾌﾟﾅﾝﾊﾞｰ)</remarks>
         /// <br/>
-        /// ﾀｲﾌﾟﾅﾝﾊﾞｰ：0 ｽｹｰﾙ :1 ﾛｰﾃｰｼｮﾝ :3 ﾄﾗﾝｽﾚｰｼｮﾝ
+        /// ﾀｲﾌﾟﾅﾝﾊﾞｰ：0 ｽｹｰﾙ :1 ﾛｰﾃｰｼｮﾝ :2 ﾄﾗﾝｽﾚｰｼｮﾝ
         /// </summary>
         /// 
         public void Mode_Checker(int bones , int type_num　, bool dgv_write ,bool plot_reader = false) 
         {
-            com1.Items.Clear();
+            if (type_num == 0) com1.Items.Clear();
+            if (type_num == 1) com2.Items.Clear();
+            if (type_num == 2) com3.Items.Clear();
             rotList_Num = new int[bones*9];
             rotList_Start = new int[bones * 9];
             rotList_Tangent = new int[bones * 9];
+            scaleList_Num = new int[bones * 9];
+            scaleList_Start = new int[bones * 9];
+            scaleList_Tangent = new int[bones * 9];
+            transList_Num = new int[bones * 9];
+            transList_Start = new int[bones * 9];
+            transList_Tangent = new int[bones * 9];
 
             string Bone_Num_And_XYZ = "";
             for (int c = type_num; (bones * 9) > c; c = c + 3)
             {
                 Bone_Num_And_XYZ = (dgv1.Rows[c].Cells["BoneNum"].Value.ToString()+"_"+ dgv1.Rows[c].Cells["XYZ_State"].Value.ToString());
-
+                Debugger.Append(dgv1.Rows[c].Cells["BoneNum"].Value.ToString() + "_" + dgv1.Rows[c].Cells["XYZ_State"].Value.ToString());
                 Frame_Num_String = dgv1.Rows[c].Cells["Frame_Num"].Value.ToString();
                 Start_Frame_String = dgv1.Rows[c].Cells["Start_Frame"].Value.ToString();
                 Tangent_String = dgv1.Rows[c].Cells["Tangent_Mode"].Value.ToString();
                 Frame_Num_Int = Convert.ToInt32(Frame_Num_String);
                 Start_Frame_Int = Convert.ToInt32(Start_Frame_String);
                 Tangent_Int = Convert.ToInt32(Tangent_String);
-                com1.Items.Add(Bone_Num_And_XYZ);
+                
+                bool write_read = dgv_write;
                 if (type_num == 1)
                 {
-                    bool write_read = dgv_write;
+                    
+                    com2.Items.Add(Bone_Num_And_XYZ);
                     if (plot_reader == false) { Rot_Mode(write_read); }
                     else
                     {
@@ -159,26 +169,86 @@ namespace J3D_BCK_Editor.File_Edit
                 }
                 else if (type_num == 0)
                 {
-                    Scale_Trans_Mode(dgv_write, dgv2, "Scale_Value");
+                    
+                    com1.Items.Add(Bone_Num_And_XYZ);
+                    if (plot_reader == false)
+                    {
+                        Scale_Trans_Mode(dgv_write, dgv2, "Scale_Value");
+                    }
+                    else
+                    {
+                        scaleList_Num[c] = Frame_Num_Int;
+                        scaleList_Start[c] = Start_Frame_Int;
+                        scaleList_Tangent[c] = Tangent_Int;
+
+                    }
+
                 }
                 else if (type_num == 2)
                 {
-                    Scale_Trans_Mode(dgv_write, dgv4, "Translation_Value");
+                    com3.Items.Add(Bone_Num_And_XYZ);
+                    if (plot_reader == false)
+                    {
+                        Scale_Trans_Mode(dgv_write, dgv4, "Translation_Value");
+                    }
+                    else
+                    {
+                        transList_Num[c] = Frame_Num_Int;
+                        transList_Start[c] = Start_Frame_Int;
+                        transList_Tangent[c] = Tangent_Int;
+
+                    }
                 }
             }
             if (plot_reader == true) 
             {
                 int rc = 0;
-                foreach (var y in rotList_Num.Select((value, index) => new { value, index })) {
-                    if ((y.value != 0)&& (y.value > 0)) {
-                        Plot_List_Rot_Combo.Add(new List<int>());
-                        Plot_List_Rot_Combo[rc].Add(rotList_Start[y.index]);
-                        Plot_List_Rot_Combo[rc].Add(rotList_Num[y.index]);
-                        Plot_List_Rot_Combo[rc].Add(rotList_Tangent[y.index]);
-                        rc++;   
+
+                if (type_num == 1)
+                {
+                    Plot_List_Rot_Combo.Clear();
+                    foreach (var y in rotList_Num.Select((value, index) => new { value, index }))
+                    {
+                        if ((y.value != 0) && (y.value > 0))
+                        {
+                            Plot_List_Rot_Combo.Add(new List<int>());
+                            Plot_List_Rot_Combo[rc].Add(rotList_Start[y.index]);
+                            Plot_List_Rot_Combo[rc].Add(rotList_Num[y.index]);
+                            Plot_List_Rot_Combo[rc].Add(rotList_Tangent[y.index]);
+                            rc++;
+                        }
                     }
                 }
-                
+                if (type_num == 0)
+                {
+                    Plot_List_Scale_Combo.Clear();
+                    foreach (var y in scaleList_Num.Select((value, index) => new { value, index }))
+                    {
+                        if ((y.value != 0) && (y.value > 0))
+                        {
+                            Plot_List_Scale_Combo.Add(new List<int>());
+                            Plot_List_Scale_Combo[rc].Add(scaleList_Start[y.index]);
+                            Plot_List_Scale_Combo[rc].Add(scaleList_Num[y.index]);
+                            Plot_List_Scale_Combo[rc].Add(scaleList_Tangent[y.index]);
+                            rc++;
+                        }
+                    }
+                }
+                if (type_num == 2)
+                {
+                    Plot_List_Trans_Combo.Clear();
+                    foreach (var y in transList_Num.Select((value, index) => new { value, index }))
+                    {
+                        if ((y.value != 0) && (y.value > 0))
+                        {
+                            Plot_List_Trans_Combo.Add(new List<int>());
+                            Plot_List_Trans_Combo[rc].Add(transList_Start[y.index]);
+                            Plot_List_Trans_Combo[rc].Add(transList_Num[y.index]);
+                            Plot_List_Trans_Combo[rc].Add(transList_Tangent[y.index]);
+                            rc++;
+                        }
+                    }
+                }
             }
         }
         public void Rot_Mode(bool dgv_write) 
@@ -267,7 +337,7 @@ namespace J3D_BCK_Editor.File_Edit
                     dgv.Rows[a].Cells[cell_name].Value = Convert.ToInt16(dgvfloat);
                 }
 
-                //debug.AppendText(EN.NewLine + a.ToString() + "リスト");
+                //Debugger.Append(EN.NewLine + a.ToString() + "リスト");
             }
         }
     }

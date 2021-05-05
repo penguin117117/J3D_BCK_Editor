@@ -160,7 +160,7 @@ namespace J3D_BCK_Editor
                 return;
             }
             Plot pt = new Plot();
-            pt.Draw(pictureBox1, float.Parse(textBox1.Text));
+            pt.Draw(pictureBox1,dataGridView2 , "Scale_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
             //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
 
@@ -174,7 +174,7 @@ namespace J3D_BCK_Editor
             }
             if (comboBox1.Text == "選択してください")return ;
             Plot pt = new Plot();
-            pt.Draw(pictureBox1,float.Parse( textBox1.Text));
+            pt.Draw(pictureBox1,dataGridView2, "Scale_Value", float.Parse( textBox1.Text), float.Parse(textBox2.Text));
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -184,6 +184,26 @@ namespace J3D_BCK_Editor
             {
                 e.Handled = true;
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((dataGridView1.Rows.Count == 0) || (dataGridView2.Rows.Count == 0) || (dataGridView3.Rows.Count == 0) || (dataGridView4.Rows.Count == 0))
+            {
+                return;
+            }
+            Plot pt = new Plot();
+            pt.Draw(pictureBox1, dataGridView3, "Rotation_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((dataGridView1.Rows.Count == 0) || (dataGridView2.Rows.Count == 0) || (dataGridView3.Rows.Count == 0) || (dataGridView4.Rows.Count == 0))
+            {
+                return;
+            }
+            Plot pt = new Plot();
+            pt.Draw(pictureBox1, dataGridView4, "Translation_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
         }
     }
 }

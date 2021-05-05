@@ -13,27 +13,69 @@ namespace J3D_BCK_Editor.File_Edit
 {
     class BCK_State
     {
-        public static TextBox debug = Form1.Form1Instance.デバッグ;
-        public static TextBox Txt_Bone_Num = Form1.Form1Instance.Bone_Num;
-        public static TextBox Txt_Rot_Frac = Form1.Form1Instance.Txt_Rot_Frac;
-        public static TextBox Txt_Roop_Mode = Form1.Form1Instance.Txt_Roop_Mode;
-        public static TextBox Txt_Total_Frame = Form1.Form1Instance.Total_Frame;
-        public static DataGridView dgv1 = Form1.Form1Instance.dataGridView1;
-        public static DataGridView dgv2 = Form1.Form1Instance.dataGridView2;
-        public static DataGridView dgv3 = Form1.Form1Instance.dataGridView3;
-        public static DataGridView dgv4 = Form1.Form1Instance.dataGridView4;
-        public static PictureBox pic1 = Form1.Form1Instance.pictureBox1;
-        public static ComboBox com1 = Form1.Form1Instance.comboBox1;
-        public static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
-        public static List<string> Anim_scale_str = new List<string>();
-        public static List<string> Anim_rotation_str = new List<string>();
+        
+        protected static TextBox Txt_Bone_Num = Form1.Form1Instance.Bone_Num;
+        protected static TextBox Txt_Rot_Frac = Form1.Form1Instance.Txt_Rot_Frac;
+        protected static TextBox Txt_Roop_Mode = Form1.Form1Instance.Txt_Roop_Mode;
+        protected static TextBox Txt_Total_Frame = Form1.Form1Instance.Total_Frame;
+        protected static DataGridView dgv1 = Form1.Form1Instance.dataGridView1;
+        protected static DataGridView dgv2 = Form1.Form1Instance.dataGridView2;
+        protected static DataGridView dgv3 = Form1.Form1Instance.dataGridView3;
+        protected static DataGridView dgv4 = Form1.Form1Instance.dataGridView4;
+        protected static PictureBox pic1 = Form1.Form1Instance.pictureBox1;
+        protected static ComboBox com1 = Form1.Form1Instance.comboBox1;
+        protected static ComboBox com2 = Form1.Form1Instance.comboBox2;
+        protected static ComboBox com3 = Form1.Form1Instance.comboBox3;
+        protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
+        protected static List<string> Anim_scale_str = new List<string>();
+        protected static List<string> Anim_rotation_str = new List<string>();
 
+        
+        
         //▽宣言
-
+        private static string _magic_1 { get; set; }
+        private static string _magic_2 { get; set; }
+        private static int _file_size { get; set; }
+        
         //▽J3Dヘッダー
-        protected static string Magic_1;
-        protected static string Magic_2;
-        protected static int File_Size;
+        protected string Magic_1
+        {
+            set
+            {
+                if (value != "J3D1")value = "J3D1" ;
+                _magic_1 = value;
+            }
+            get { return _magic_1; }
+        }
+
+        protected string Magic_2
+        {
+            set
+            {
+                if (value != "bck1") value = "bck1";
+                _magic_2 = value;
+            }
+            get { return _magic_2; }
+        }
+
+        protected int File_Size 
+        {
+            set 
+            {
+                if (value < 0) 
+                {
+                    value = 1;
+                    Debugger.Append("ファイルサイズが 1 以下です");
+                }
+                _file_size = value;
+            }
+            get { return _file_size; }
+        }
+
+
+        //protected static string Magic_1;
+        //protected static string Magic_2;
+        //protected static int File_Size;
         protected static int Chunk_Count;
         protected static string Subversion;
         protected static string padding;
@@ -57,8 +99,12 @@ namespace J3D_BCK_Editor.File_Edit
         protected static int debugnum = 0;
         protected static string Frame_Num_String, Start_Frame_String, Tangent_String;
         protected static int Frame_Num_Int, Start_Frame_Int, Tangent_Int;
+        protected static List<List<int>> Plot_List_Scale_Combo = new List<List<int>>();
         protected static List<List<int>> Plot_List_Rot_Combo = new List<List<int>>();
+        protected static List<List<int>> Plot_List_Trans_Combo = new List<List<int>>();
         protected static int[] rotList_Num, rotList_Start, rotList_Tangent;
+        protected static int[] scaleList_Num, scaleList_Start, scaleList_Tangent;
+        protected static int[] transList_Num, transList_Start, transList_Tangent;
     }
 
     class BCK:BCK_State
@@ -117,27 +163,27 @@ namespace J3D_BCK_Editor.File_Edit
 
          //☆デバッガー
             //☆j3d
-            debug.AppendText ( "マジック1："+ Magic_1);
-            debug.AppendText("\r\n" + "マジック2：" + Magic_2);
-            debug.AppendText("\r\n" + "ファイルサイズ：" + File_Size);
-            debug.AppendText("\r\n" + "チャンクカウント：" + Chunk_Count);
-            debug.AppendText("\r\n" + "サブバージョン：" + Subversion);
-            debug.AppendText("\r\n" + "パディング：" + padding);
+            Debugger.Append ( "マジック1："+ Magic_1);
+            Debugger.Append("\r\n" + "マジック2：" + Magic_2);
+            Debugger.Append("\r\n" + "ファイルサイズ：" + File_Size);
+            Debugger.Append("\r\n" + "チャンクカウント：" + Chunk_Count);
+            Debugger.Append("\r\n" + "サブバージョン：" + Subversion);
+            Debugger.Append("\r\n" + "パディング：" + padding);
             //☆ank1
-            debug.AppendText("\r\n" + "チャンクタイプ：" + Chunk_Type);
-            debug.AppendText("\r\n" + "アニメーションサイズ：" + Anim_Size);
-            debug.AppendText("\r\n" + "ループモード：" + Roop_Mode);
-            debug.AppendText("\r\n" + "回転フラク？：" + Rotation_Frac);
-            debug.AppendText("\r\n" + "フレーム数：" + Frame_Num);
-            debug.AppendText("\r\n" + "ボーン数：" + Bone_Num);
-            debug.AppendText("\r\n" + "スケールテーブルカウント：" + Scale_Table_Count);
-            debug.AppendText("\r\n" + "ローテーションテーブルカウント：" + Rotation_Table_Count);
-            debug.AppendText("\r\n" + "トランスレートテーブルカウント：" + Translation_Table_Count);
-            debug.AppendText("\r\n" + "アニメーションオフセット：" + Animation_Data_Table_Offset);
-            debug.AppendText("\r\n" + "スケールテーブルオフセット：" + Scale_Table_Offset);
-            debug.AppendText("\r\n" + "ローテーションテーブルオフセット：" + Rotation_Table_Offset);
-            debug.AppendText("\r\n" + "トランスレートテーブルオフセット：" + Translation_Table_Offset);
-            debug.AppendText("\r\n" + "paddingdata：" + Padding_Data_1);
+            Debugger.Append("\r\n" + "チャンクタイプ：" + Chunk_Type);
+            Debugger.Append("\r\n" + "アニメーションサイズ：" + Anim_Size);
+            Debugger.Append("\r\n" + "ループモード：" + Roop_Mode);
+            Debugger.Append("\r\n" + "回転フラク？：" + Rotation_Frac);
+            Debugger.Append("\r\n" + "フレーム数：" + Frame_Num);
+            Debugger.Append("\r\n" + "ボーン数：" + Bone_Num);
+            Debugger.Append("\r\n" + "スケールテーブルカウント：" + Scale_Table_Count);
+            Debugger.Append("\r\n" + "ローテーションテーブルカウント：" + Rotation_Table_Count);
+            Debugger.Append("\r\n" + "トランスレートテーブルカウント：" + Translation_Table_Count);
+            Debugger.Append("\r\n" + "アニメーションオフセット：" + Animation_Data_Table_Offset);
+            Debugger.Append("\r\n" + "スケールテーブルオフセット：" + Scale_Table_Offset);
+            Debugger.Append("\r\n" + "ローテーションテーブルオフセット：" + Rotation_Table_Offset);
+            Debugger.Append("\r\n" + "トランスレートテーブルオフセット：" + Translation_Table_Offset);
+            Debugger.Append("\r\n" + "paddingdata：" + Padding_Data_1);
 
             //★BCKクラスインスタンス作成
             BCK_System bcksys = new BCK_System();
@@ -153,7 +199,8 @@ namespace J3D_BCK_Editor.File_Edit
             {
                 dgv2.Rows.Add(l, string.Format("{0:}", CS.FromHexString(br)));
             }
-            
+            bcksys.Mode_Checker(Bone_Num, 0, true, true);
+
             //★パディング3
             bcksys.Padding(br,fs.Position);
 
@@ -172,8 +219,9 @@ namespace J3D_BCK_Editor.File_Edit
             //★トランスレートテーブルグリッドに書き込み
             for (int l = 0; l < Translation_Table_Count; l++)
             {
-                dgv4.Rows.Add(l, string.Format("{0:f}", CS.Byte2Float(br)));
+                dgv4.Rows.Add(l, string.Format("{0}", CS.Byte2Float(br)));
             }
+            bcksys.Mode_Checker(Bone_Num, 2, true, true);
 
             //★パディング5
             bcksys.Padding(br, fs.Position);

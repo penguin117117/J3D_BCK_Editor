@@ -50,8 +50,10 @@
     <Compile Include="File_Edit\BCK.cs" />
     <Compile Include="File_Edit\BCK_System.cs" />
     <Compile Include="File_Edit\Calculation_System.cs" />
+    <Compile Include="File_Edit\Debugger.cs" />
     <Compile Include="File_Edit\File_Select.cs" />
     <Compile Include="File_Edit\Plot.cs" />
+    <Compile Include="File_Edit\Points.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

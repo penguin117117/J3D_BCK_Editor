@@ -142,7 +142,9 @@ BCK_ファイルの編集を可能にするツールまだテストバージョ�
 </tbody>
 </table>
 今回のデータの場合グラフは下図のようになります。<br/>
-![j3dbck08](https://user-images.githubusercontent.com/82487890/117534943-7f8f1600-b02e-11eb-8aa5-c3f73b011f1f.jpg)<br/>
+![j3dbck08](https://user-images.githubusercontent.com/82487890/117535156-7a7e9680-b02f-11eb-943a-79bcaa0dd343.jpg)
+
+<br/>
 
 ### フレーム数が2以上でタンジェントモードが1の場合
 このケースの場合は4つの値を取ります。<br/>

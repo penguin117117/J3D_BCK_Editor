@@ -197,8 +197,10 @@ namespace J3D_BCK_Editor.File_Edit
             //★スケールテーブルグリッドに書き込み
             for (int l = 0;l<Scale_Table_Count;l++) 
             {
-                dgv2.Rows.Add(l, string.Format("{0:}", CS.FromHexString(br)));
+                dgv2.Rows.Add(l, string.Format("{0:0.##########}", CS.FromHexString(br)));
+                //dgv2.Rows.Add(l, string.Format("{0:F}", CS.Byte2Float(br)));
             }
+            //bcksys.Mode_Checker(Bone_Num, 0, true);
             bcksys.Mode_Checker(Bone_Num, 0, true, true);
 
             //★パディング3
@@ -219,7 +221,7 @@ namespace J3D_BCK_Editor.File_Edit
             //★トランスレートテーブルグリッドに書き込み
             for (int l = 0; l < Translation_Table_Count; l++)
             {
-                dgv4.Rows.Add(l, string.Format("{0}", CS.Byte2Float(br)));
+                dgv4.Rows.Add(l, string.Format("{0:0.##########}", CS.Byte2Float(br)));
             }
             bcksys.Mode_Checker(Bone_Num, 2, true, true);
 

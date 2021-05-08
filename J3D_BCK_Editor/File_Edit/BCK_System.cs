@@ -30,7 +30,7 @@ namespace J3D_BCK_Editor.File_Edit
             string[] xyzstate = { "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" };
                 for (int i = 0; i < Bone_Num; i++){
                     for (int j = 0; j < 9; j++){
-                        dgv1.Rows.Add("Bone" + i, xyzstate[j], CS.Byte2Int(br, 2), CS.Byte2Int(br, 2), CS.Byte2Int(br, 2));
+                        dgv1.Rows.Add("ｼﾞｮｲﾝﾄ" + i, xyzstate[j], CS.Byte2Int(br, 2), CS.Byte2Int(br, 2), CS.Byte2Int(br, 2));
                     }
                 }
             
@@ -97,7 +97,9 @@ namespace J3D_BCK_Editor.File_Edit
                 bw.Write(CS.StringToBytes(
                     CS.Int16_ToHexString(
                         Convert.ToInt16(
-                            dgv.Rows[i].Cells[Column_Name].Value)
+                           float.Parse(
+                               string.Format("{0:0.##########}", dgv.Rows[i].Cells[Column_Name].Value.ToString()), CultureInfo.InvariantCulture.NumberFormat)
+                               )
                             )
                         )
                     );
@@ -189,7 +191,7 @@ namespace J3D_BCK_Editor.File_Edit
                     com3.Items.Add(Bone_Num_And_XYZ);
                     if (plot_reader == false)
                     {
-                        Scale_Trans_Mode(dgv_write, dgv4, "Translation_Value");
+                        Scale_Trans_Mode(dgv_write, dgv4, "Translation_Value" ,2);
                     }
                     else
                     {
@@ -288,40 +290,50 @@ namespace J3D_BCK_Editor.File_Edit
                 {
                     dgv3float = Convert.ToSingle(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
                     dgv3float = (dgv3float / 182);
-                    dgv3.Rows[a].Cells["Rotation_Value"].Value = dgv3float.ToString("0.##########");
+                    dgv3.Rows[a].Cells["Rotation_Value"].Value = dgv3float.ToString("F10");
 
                     
                 }
                 else
                 {
                     //Debugger.Append(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
-                    dgv3float = float.Parse(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString());
+                    dgv3float = float.Parse(dgv3.Rows[a].Cells["Rotation_Value"].Value.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
                     dgv3float = (dgv3float )*182;
-                    dgv3.Rows[a].Cells["Rotation_Value"].Value = Convert.ToInt16(dgv3float);
+                    //dgv3.Rows[a].Cells["Rotation_Value"].Value = Convert.ToInt16(dgv3float);
+                    dgv3.Rows[a].Cells["Rotation_Value"].Value = (Int16)dgv3float;
                 }
+
+
             }
         }
 
-        public void Scale_Trans_Mode(bool dgv_write ,DataGridView dgv ,string cell_name)
+        public void Scale_Trans_Mode(bool dgv_write ,DataGridView dgv ,string cell_name ,int dgvtype = 0)
         {
             int[] S_T_List = new int[dgv.Rows.Count];
             float dgvfloat;
-            if (Tangent_String == "0" && (Start_Frame_Int > 0) && (Frame_Num_Int > 1))
+
+            if (Tangent_String == "0" && Frame_Num_String == "1")
             {
-                for (int i = (Start_Frame_Int + 2); (Start_Frame_Int + 2) + (Frame_Num_Int * 3) > i; i = i + 3)
+                S_T_List[Start_Frame_Int] = Start_Frame_Int;
+            }
+            else if (Tangent_String == "0" && (Start_Frame_Int > 0) && (Frame_Num_Int > 1))
+            {
+                for (int j = (Start_Frame_Int + dgvtype); (Start_Frame_Int + dgvtype) + (Frame_Num_Int * 3) > j; j = j + 3)
                 {
-                    S_T_List[i] = i;
+                    S_T_List[j] = j;
+                    //j++;
+                    //S_T_List[j] = j;
+
                 }
             }
             else if (Tangent_String == "1" && Frame_Num_String != "1")
             {
-                for (int j = (Start_Frame_Int + 2); (Start_Frame_Int + 2) + (Frame_Num_Int * 4) > j; j = j + 3)
+                for (int j = (Start_Frame_Int + dgvtype); (Start_Frame_Int + dgvtype) + (Frame_Num_Int * 4) > j; j = j + 4)
                 {
                     S_T_List[j] = j;
-                    j++;
-                    S_T_List[j] = j;
-
+                    //j++;
+                    //S_T_List[j] = j;
                 }
             }
 
@@ -330,13 +342,16 @@ namespace J3D_BCK_Editor.File_Edit
             {
                 if (dgv_write == true)
                 {
-                    dgvfloat = float.Parse(dgv.Rows[a].Cells[cell_name].Value.ToString());
-                    dgv.Rows[a].Cells[cell_name].Value = (string.Format("{0:f}",CS.Float_ToHexString(dgvfloat)));
+                    //dgvfloat = Convert.ToSingle(dgv.Rows[a].Cells[cell_name].Value.ToString());
+                    //dgvfloat = float.Parse(dgv.Rows[a].Cells[cell_name].Value.ToString());
+                    //dgv.Rows[a].Cells[cell_name].Value = (string.Format("{0}", CS.Float_ToHexString(dgvfloat)));
+                    //dgv.Rows[a].Cells[cell_name].Value = dgvfloat.ToString("F10");
                 }
                 else
                 {
                     dgvfloat = Convert.ToSingle(dgv.Rows[a].Cells[cell_name].Value.ToString());
-                    dgv.Rows[a].Cells[cell_name].Value = Convert.ToInt16(dgvfloat);
+                    //dgv.Rows[a].Cells[cell_name].Value = Convert.ToInt16(dgvfloat);
+                    dgv.Rows[a].Cells[cell_name].Value = (Int16)dgvfloat;
                 }
 
                 //Debugger.Append(EN.NewLine + a.ToString() + "リスト");

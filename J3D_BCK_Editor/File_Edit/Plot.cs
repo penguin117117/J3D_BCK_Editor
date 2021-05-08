@@ -132,14 +132,19 @@ namespace J3D_BCK_Editor.File_Edit
                 float dgv3_fn0 = 0;
                 float dgv3_va_0 = 0;
                 float dgv3_ta_0 = 0;
+
+
                 //初期化
                 Debugger.Append(dgv.Rows[i].Cells[dgvcellname].Value.ToString());
-                    dgv3_fn = Convert.ToInt16(dgv.Rows[i].Cells[dgvcellname].Value);
-                
+                //dgv3_fn = Convert.ToInt16( dgv.Rows[i].Cells[dgvcellname].Value);
+
+                dgv3_fn = Convert.ToInt16(float.Parse(dgv.Rows[i].Cells[dgvcellname].Value.ToString()), CultureInfo.InvariantCulture.NumberFormat);
+                //dgv3_fn = Int16.Parse(dgv.Rows[i].Cells[dgvcellname].Value.ToString());
                 dgv3_fn2 = dgv3_fn;
                 if (dgv.RowCount < i + (3 + pl_tan))
                 {
-                    dgv3_fn2 = Convert.ToInt16(dgv.Rows[i + (3 + pl_tan)].Cells[dgvcellname].Value);
+                    //dgv3_fn2 = Convert.ToInt16(dgv.Rows[i + (3 + pl_tan)].Cells[dgvcellname].Value);
+                    dgv3_fn2 = Convert.ToInt16(float.Parse(dgv.Rows[i + (3 + pl_tan)].Cells[dgvcellname].Value.ToString()), CultureInfo.InvariantCulture.NumberFormat);
                     dgv3_va2 = float.Parse(string.Format("{0:0.##########}", dgv.Rows[i + (3 + pl_tan) + 1].Cells[dgvcellname].Value, CultureInfo.InvariantCulture.NumberFormat));
                     dgv3_ta_2 = float.Parse(string.Format("{0:0.##########}", dgv.Rows[i + (3 + pl_tan) + 2].Cells[dgvcellname].Value, CultureInfo.InvariantCulture.NumberFormat))/frac;
                 }
@@ -149,9 +154,9 @@ namespace J3D_BCK_Editor.File_Edit
                 {
                     Debugger.Append((i - (3 + pl_tan)).ToString());
                     Debugger.Append(dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value.ToString() + "ほし★");
-                    Console.WriteLine(i - (3 + pl_tan));
-                    Console.WriteLine(dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value+"ほし★");
-                    dgv3_fn0 = Convert.ToInt16(dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value);
+                    
+                    //dgv3_fn0 = Convert.ToInt16(dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value);
+                    dgv3_fn0 = Convert.ToInt16(float.Parse( dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value.ToString()), CultureInfo.InvariantCulture.NumberFormat);
                     dgv3_va_0 = float.Parse(string.Format("{0:0.##########}", dgv.Rows[i  - (3 + pl_tan)+1].Cells[dgvcellname].Value, CultureInfo.InvariantCulture.NumberFormat));
                     dgv3_ta_0 = float.Parse(string.Format("{0:0.##########}", dgv.Rows[i - (3 + pl_tan)+2].Cells[dgvcellname].Value, CultureInfo.InvariantCulture.NumberFormat))/frac;
                 }
@@ -165,6 +170,8 @@ namespace J3D_BCK_Editor.File_Edit
                 p0.Y *= plot_scaley;
                 p1.X *= plot_scale;
                 p1.Y *= plot_scaley;
+
+                //グラフ値書き込み
                 txt3.AppendText(EN.NewLine + EN.NewLine +"/////////////////////");
                 txt3.AppendText(EN.NewLine+"ｷｰﾌﾚｰﾑﾃｰﾌﾞﾙ番号："+ i);
                 txt3.AppendText(EN.NewLine + "値テーブル番号：" + (i+1));
@@ -183,20 +190,20 @@ namespace J3D_BCK_Editor.File_Edit
                     {
                         l2pf.Add(p1);
                         l2pf.Add(p2);
-                        Console.WriteLine("先頭");
+                        
                     }
                     else if (pl_sfn + (pl_cfn * (3 + pl_tan)) - 3 > i)
                     {
                         l2pf.Add(p0);
                         l2pf.Add(p1);
                         l2pf.Add(p2);
-                        Console.WriteLine("中間");
+                        
                     }
                     else
                     {
                         l2pf.Add(p0);
                         l2pf.Add(p1);
-                        Console.WriteLine("末尾");
+                        
                     }
                 }
                 //ﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞあり
@@ -218,20 +225,20 @@ namespace J3D_BCK_Editor.File_Edit
                     {
                         l2pf.Add(p1);
                         l2pf.Add(p2);
-                        Console.WriteLine("タンジェント先頭");
+                        
                     }
                     else if (pl_sfn + (pl_cfn * (3 + pl_tan)) - 4 > i)
                     {
                         l2pf.Add(p0);
                         l2pf.Add(p1);
                         l2pf.Add(p2);
-                        Console.WriteLine("タンジェント中間");
+                        
                     }
                     else
                     {
                         l2pf.Add(p0);
                         l2pf.Add(p1);
-                        Console.WriteLine("タンジェント末尾");
+                        
                     }
 
                 }
@@ -263,14 +270,7 @@ namespace J3D_BCK_Editor.File_Edit
                 
             }
             Debugger.Append(""+canvas_size);
-            //ワールド設定
-            //g.ResetTransform();
-            //g.TranslateTransform(0, canvas.Height / 2);
-            //g.ScaleTransform(2F, 2F);
-
-
             
-
             Bitmap canvas2 = new Bitmap(Convert.ToInt32((Frame_Num) *plot_scale+20),Convert.ToInt32 (canvas_size*plot_scaley)+20) ;
             Graphics g2 = Graphics.FromImage(canvas2);
             g2.Clear(Color.Transparent);
@@ -285,8 +285,6 @@ namespace J3D_BCK_Editor.File_Edit
             g2.DrawLine(penR, new PointF(0, (canvas_size / 4) * plot_scaley), new PointF(5, (canvas_size / 4) * plot_scaley));
             g2.DrawBeziers(penB, point2);
 
-            //g2.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            //g2.DrawImage(canvas2, 0, 0,  canvas2.Width * plot_scale, canvas2.Height * plot_scale);
             //ピクチャボックスに表示
 
             

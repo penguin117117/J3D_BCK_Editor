@@ -18,6 +18,7 @@ namespace J3D_BCK_Editor
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
@@ -44,6 +45,8 @@ namespace J3D_BCK_Editor
             dataGridView2.AutoGenerateColumns = false;
             dataGridView3.AutoGenerateColumns = false;
             dataGridView4.AutoGenerateColumns = false;
+
+            
         }
 
         //インスタンスの作成
@@ -66,6 +69,9 @@ namespace J3D_BCK_Editor
             Form1 f = new Form1();
             Form1.Form1Instance = f;
             Form1.Form1Instance = this;
+
+            
+            
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e)

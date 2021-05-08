@@ -26,10 +26,27 @@ namespace J3D_BCK_Editor.File_Edit
         public static float Byte2Float(BinaryReader br, int readbyte = 4)
         {
             string str = string.Format("{0:f}", BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'));
-            Console.WriteLine(str);
+            //Console.WriteLine(str);
             int num = Convert.ToInt32(str,16);
             byte[] bytenum = BitConverter.GetBytes(num);
             return BitConverter.ToSingle(bytenum, 0);
+        }
+
+
+        public static int Byte2Int2(BinaryReader br, int readbyte = 4)
+        {
+            string str = BitConverter.ToString(br.ReadBytes(readbyte)).Replace("-", "").PadLeft(8, '0');
+            
+            var num = Convert.ToInt32(str, 16);
+            
+            return Convert.ToInt32(num);
+        }
+
+        public static int Byte2Int32(BinaryReader br)
+        {
+            string str = BitConverter.ToString(br.ReadBytes(4)).Replace("-", "").PadLeft(8, '0');
+            var i = Convert.ToInt32(str, 16);
+            return Convert.ToInt32(i);
         }
 
         public static short Byte2Short_noPI(BinaryReader br) 
@@ -38,6 +55,8 @@ namespace J3D_BCK_Editor.File_Edit
             var i = Convert.ToInt16(str, 16);
             return Convert.ToInt16(i);
         }
+
+
 
         public static short Byte2Short(BinaryReader br)
         {

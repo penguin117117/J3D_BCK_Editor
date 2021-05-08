@@ -7,7 +7,7 @@
     <ProjectGuid>{9D3BA7DD-A1D2-44DC-B23B-73E3AD1ED5FA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>J3D_BCK_Editor</RootNamespace>
-    <AssemblyName>J3D_BCK_Editor_β</AssemblyName>
+    <AssemblyName>J3D_BCK_Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\J3D_BCK_Editor_β0.5.0.0\</OutputPath>
+    <OutputPath>bin\Release\J3D_BCK_Editor_ver0.5.0.0\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

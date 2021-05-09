@@ -29,6 +29,8 @@ namespace J3D_BCK_Editor.File_Edit
             float plot_scaley = scale2;
             float canvas_size=360;
             string statetxt;
+            string[] cellname = {"スケールテーブル","ローテートテーブル","トランスレートテーブル" };
+            string txtbox3_table_name = "エラー";
             //初期化
             if (dgvcellname == "Rotation_Value")
             {
@@ -36,6 +38,7 @@ namespace J3D_BCK_Editor.File_Edit
                 pl_cfn = Plot_List_Rot_Combo[com2.SelectedIndex][1];
                 pl_tan = Plot_List_Rot_Combo[com2.SelectedIndex][2];
                 statetxt = com2.Text;
+                txtbox3_table_name = cellname[1];
             }
             else if (dgvcellname == "Scale_Value")
             {
@@ -43,6 +46,7 @@ namespace J3D_BCK_Editor.File_Edit
                 pl_cfn = Plot_List_Scale_Combo[com1.SelectedIndex][1];
                 pl_tan = Plot_List_Scale_Combo[com1.SelectedIndex][2];
                 statetxt = com1.Text;
+                txtbox3_table_name = cellname[0];
             }
             else
             {
@@ -50,6 +54,7 @@ namespace J3D_BCK_Editor.File_Edit
                 pl_cfn = Plot_List_Trans_Combo[com3.SelectedIndex][1];
                 pl_tan = Plot_List_Trans_Combo[com3.SelectedIndex][2];
                 statetxt = com3.Text;
+                txtbox3_table_name = cellname[2];
             }
 
 
@@ -77,7 +82,7 @@ namespace J3D_BCK_Editor.File_Edit
                 if (f != 0) { frac *= 10; }
             }
             if (dgvcellname != "Rotation_Value")frac = 1 ;
-            txt3.Text = "";
+            //txt3.Text = "";
             
             //デバッグ
             Debugger.Append(pl_sfn + "_" + pl_cfn + "_" + pl_tan);
@@ -91,8 +96,8 @@ namespace J3D_BCK_Editor.File_Edit
                 p_line  = new PointF(0 ,lineF * plot_scaley);
                 p_line2 = new PointF(Max_Frame * plot_scale ,lineF * plot_scaley);
                 Debugger.Append(EN.NewLine + lineF);
-
-                txt3.AppendText( "値テーブル番号：" + pl_sfn);
+                txt3.AppendText(txtbox3_table_name + "の" + EN.NewLine + "値を参照");
+                txt3.AppendText(EN.NewLine + "値テーブル番号：" + pl_sfn);
                 txt3.AppendText(EN.NewLine + "この場所の値:" + lineF.ToString());
                 if(lineF>360)
                 canvas_size = lineF;
@@ -123,6 +128,8 @@ namespace J3D_BCK_Editor.File_Edit
 
 
             List<PointF> l2pf = new List<PointF>();
+            
+            txt3.AppendText(txtbox3_table_name + "の"+EN.NewLine+"値を参照");
             //曲線のあるパターン(エルミート曲線)
             for (int i = pl_sfn; i < pl_sfn + (pl_cfn * (3 + pl_tan)); i += (3 + pl_tan))
             {
@@ -173,10 +180,11 @@ namespace J3D_BCK_Editor.File_Edit
 
                 //グラフ値書き込み
                 txt3.AppendText(EN.NewLine + EN.NewLine +"/////////////////////");
-                txt3.AppendText(EN.NewLine+"ｷｰﾌﾚｰﾑﾃｰﾌﾞﾙ番号："+ i);
-                txt3.AppendText(EN.NewLine + "値テーブル番号：" + (i+1));
-                txt3.AppendText(EN.NewLine + "キーフレーム：" +p1.X);
-                txt3.AppendText(EN.NewLine + "値：" + p1.Y);
+                txt3.AppendText(EN.NewLine + EN.NewLine + "★ﾃｰﾌﾞﾙ番号：" + i);
+                txt3.AppendText(EN.NewLine + "☆ﾃｰﾌﾞﾙ番号：" + (i + 1));
+                txt3.AppendText(EN.NewLine + EN.NewLine + "↓テーブルに入ってる値");
+                txt3.AppendText(EN.NewLine + EN.NewLine + "★キーフレーム：" +p1.X);
+                txt3.AppendText(EN.NewLine + "☆値：" + p1.Y);
                 //ﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞなし
                 if ((3 + pl_tan) == 3) {
                     //タンジェントモード「なし」のポイント設定&初期化

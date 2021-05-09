@@ -51,11 +51,6 @@ namespace J3D_BCK_Editor
             this.BoneDelete = new System.Windows.Forms.Button();
             this.Add_Bone = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.BoneNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.XYZ_State = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Frame_Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Start_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tangent_Mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ScaleDelete = new System.Windows.Forms.Button();
             this.ScaleAdd = new System.Windows.Forms.Button();
@@ -88,10 +83,15 @@ namespace J3D_BCK_Editor
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.デバッグ = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.BoneNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.XYZ_State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Frame_Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start_Frame = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tangent_Mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -314,31 +314,6 @@ namespace J3D_BCK_Editor
             this.dataGridView1.RowTemplate.Height = 21;
             this.dataGridView1.Size = new System.Drawing.Size(720, 406);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // BoneNum
-            // 
-            this.BoneNum.HeaderText = "ボーン数";
-            this.BoneNum.Name = "BoneNum";
-            // 
-            // XYZ_State
-            // 
-            this.XYZ_State.HeaderText = "XYZステータス";
-            this.XYZ_State.Name = "XYZ_State";
-            // 
-            // Frame_Num
-            // 
-            this.Frame_Num.HeaderText = "フレーム数";
-            this.Frame_Num.Name = "Frame_Num";
-            // 
-            // Start_Frame
-            // 
-            this.Start_Frame.HeaderText = "開始テーブル番号";
-            this.Start_Frame.Name = "Start_Frame";
-            // 
-            // Tangent_Mode
-            // 
-            this.Tangent_Mode.HeaderText = "タンジェントモード";
-            this.Tangent_Mode.Name = "Tangent_Mode";
             // 
             // tabPage2
             // 
@@ -667,6 +642,15 @@ namespace J3D_BCK_Editor
             this.tabPage6.Text = "Option";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 53);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(52, 12);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "デバッガー";
+            // 
             // デバッグ
             // 
             this.デバッグ.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -697,14 +681,31 @@ namespace J3D_BCK_Editor
             this.label9.TabIndex = 16;
             this.label9.Text = "グラフ値";
             // 
-            // label10
+            // BoneNum
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 53);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 12);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "デバッガー";
+            this.BoneNum.HeaderText = "ジョイント番号";
+            this.BoneNum.Name = "BoneNum";
+            this.BoneNum.ToolTipText = "モデルのジョイントの番号です";
+            // 
+            // XYZ_State
+            // 
+            this.XYZ_State.HeaderText = "XYZステータス";
+            this.XYZ_State.Name = "XYZ_State";
+            // 
+            // Frame_Num
+            // 
+            this.Frame_Num.HeaderText = "フレーム数";
+            this.Frame_Num.Name = "Frame_Num";
+            // 
+            // Start_Frame
+            // 
+            this.Start_Frame.HeaderText = "開始テーブル番号";
+            this.Start_Frame.Name = "Start_Frame";
+            // 
+            // Tangent_Mode
+            // 
+            this.Tangent_Mode.HeaderText = "タンジェントモード";
+            this.Tangent_Mode.Name = "Tangent_Mode";
             // 
             // Form1
             // 
@@ -757,11 +758,6 @@ namespace J3D_BCK_Editor
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BoneNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn XYZ_State;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Frame_Num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Start_Frame;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tangent_Mode;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
@@ -813,6 +809,11 @@ namespace J3D_BCK_Editor
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BoneNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn XYZ_State;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Frame_Num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Start_Frame;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tangent_Mode;
     }
 }
 

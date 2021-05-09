@@ -8,7 +8,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using EN = System.Environment;
 
 using System.Windows.Forms;
 using J3D_BCK_Editor.File_Edit;
@@ -170,6 +170,7 @@ namespace J3D_BCK_Editor
             
             
             Plot pt = new Plot();
+            textBox3.Text = "アニメーションテーブルの" + EN.NewLine + comboBox1.Text + EN.NewLine + "を参照" + EN.NewLine + EN.NewLine;
             pt.Draw(pictureBox1,dataGridView2 , "Scale_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
             //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
@@ -196,6 +197,7 @@ namespace J3D_BCK_Editor
             
             
             Plot pt = new Plot();
+            textBox3.Text = "アニメーションテーブルの" + EN.NewLine + comboBox2.Text + EN.NewLine +"を参照" +EN.NewLine+EN.NewLine;
             pt.Draw(pictureBox1, dataGridView3, "Rotation_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
         }
 
@@ -207,6 +209,7 @@ namespace J3D_BCK_Editor
             }
             
             Plot pt = new Plot();
+            textBox3.Text ="アニメーションテーブルの" + EN.NewLine + comboBox3.Text + EN.NewLine + "を参照" + EN.NewLine + EN.NewLine;
             pt.Draw(pictureBox1, dataGridView4, "Translation_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
         }
     }

@@ -1,10 +1,18 @@
 # J3D_BCK_Editor
-BCK_ファイルの編集を可能にするツールまだテストバージョンです。<br/>
+BCKファイルの編集を可能にするツール<br/>
 このソフトを使うにはBCKファイルの知識が必要です。
 ## アップデート情報
 全てのグラフが描画できるようになりました<br/>
 少数の丸め込みの誤差がなくなりました。
-## 使用方法_01(ファイルを開く)
+## 使用方法
+<details>
+<summary>ファイルを開く・・・</summary>
+
+
+
+
+
+
 ツールの使い方を説明します<br/>
 より詳しい解説は下記URL<br/>
 http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
@@ -16,8 +24,13 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 4つのテーブル(アニメーション、スケール、ローテート、トランスレート)に値が入ります。<br/>
 ![j3dbck02](https://user-images.githubusercontent.com/82487890/117532680-ad229200-b023-11eb-9555-13b2cb905351.jpg)<br/><br/>
 これらの値を編集することでアニメーションを制御できます。<br/><br/>
-## 使用方法_02(チャンクヘッダー)
+
+</details>
+<hr/>
+<details>
+<summary>チャンクヘッダー・・・</summary>
 チャンクヘッダーはあまり触らないことをお勧めします。
+  
 ### ループモード
 <table>
 <thead>
@@ -63,6 +76,8 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 </tfoot>
 </table>
 
+
+
 ### 回転倍率
 これも触らないほうがいい値です<br/>
 回転のタンジェントの値を調整します(tan × 10^値)<br/>
@@ -74,7 +89,11 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 ### ジョイント数
 ボーンのジョイントの数です
 
-## 使用方法_03(アニメーションテーブル)
+</details>
+<hr/>
+<details>
+<summary>アニメーションテーブル・・・</summary>
+
 この項目がかなり重要ですここを理解できないと他のテーブルを上手く制御できません。
 <table>
 <thead>
@@ -98,7 +117,9 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 
 </table>
 
-### フレーム数が1の場合
+<details>
+<summary>フレーム数が1の場合・・・</summary>
+
 ![j3dbck03](https://user-images.githubusercontent.com/82487890/117533772-9a12c080-b029-11eb-8c21-2edb7377961f.jpg)<br/>
 上図のようにフレーム数が1の場合はアニメーションは<br/>
 最初から最後まで同じで、1つのテーブルの値を参照します。<br/>
@@ -108,7 +129,9 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 グラフは下図のような直線のグラフになります。(青色の線)
 ![j3dbck05](https://user-images.githubusercontent.com/82487890/117534071-d8f54600-b02a-11eb-9da5-ecaee600d236.jpg)<br/>
 
-### フレーム数が2以上でタンジェントモードが0の場合
+</details>
+<details>
+<summary>フレーム数が2以上でタンジェントモードが0の場合・・・</summary>
 このケースの場合1フレームにつき3つの値を参照します。<br/>
 ![j3dbck06](https://user-images.githubusercontent.com/82487890/117534201-5d47c900-b02b-11eb-86f9-a9f9c7f09dba.jpg)<br/>
 上図のようにフレーム数が2以上でタンジェントモードが0の場合は<br/>
@@ -147,16 +170,22 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 ![j3dbck08](https://user-images.githubusercontent.com/82487890/117535156-7a7e9680-b02f-11eb-943a-79bcaa0dd343.jpg)
 
 <br/>
+</details>
 
-### フレーム数が2以上でタンジェントモードが1の場合
+<details>
+<summary>フレーム数が2以上でタンジェントモードが1の場合・・・</summary>
 このケースの場合は4つの値を取ります。<br/>
 四つの値は上から順に<br/>
 フレーム、値、コントロール1のタンジェント、コントロール2のタンジェントです。
+</details>
 
-
-
-## 使用方法(グラフ)
+</details>
+<hr/>
+<details>
+<summary>グラフ・・・</summary>
 ファイルを読み込んだ場合グラフタブのコンボボックスを選択すると<br/>
 選択されたジョイントの値をグラフに表示します。<br/>
 ジョイントの制御は3Dモデルのアニメーションの知識が必要になりますが<br/>
 適当にいじっても案外何とかなるので適当にいじってみましょう。<br/>
+  </details>
+<hr/>

@@ -237,7 +237,7 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
   
   <br/>
   <table>
-    <caption>フレーム数が2以上でタンジェントモードが0の場合</caption>
+    <caption>フレーム数が2以上でタンジェントモードが1の場合</caption>
 <thead>
 <tr>
 <th>テーブル番号</th>

@@ -7,22 +7,20 @@ BCKファイルの編集を可能にするツール<br/>
 ## 使用方法
 <details>
 <summary>ファイルを開く・・・</summary>
-
-
-
-
-
-
 ツールの使い方を説明します<br/>
 より詳しい解説は下記URL<br/>
 http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 まず既存のファイルを使うか使わないかによって使用方法が変わります。<br/>
 今回は比較的簡単な既存のファイルを使用する方法を紹介します。<br/>
 ファイル→開く　から既存のBCKファイルを開いてください。<br/>
+  
 ![j3dbck01](https://user-images.githubusercontent.com/82487890/117532597-4d2beb80-b023-11eb-98a1-95cc1d8286ce.jpg)<br/><br/>
+
 ファイルを開くとチャンクヘッダー設定と<br/>
 4つのテーブル(アニメーション、スケール、ローテート、トランスレート)に値が入ります。<br/>
+
 ![j3dbck02](https://user-images.githubusercontent.com/82487890/117532680-ad229200-b023-11eb-9555-13b2cb905351.jpg)<br/><br/>
+
 これらの値を編集することでアニメーションを制御できます。<br/><br/>
 
 </details>
@@ -132,11 +130,13 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 </details>
 <details>
 <summary>フレーム数が2以上でタンジェントモードが0の場合・・・</summary>
-このケースの場合1フレームにつき3つの値を参照します。<br/>
+このケースの場合1フレームにつき3つの値を参照します。
+  
 ![j3dbck06](https://user-images.githubusercontent.com/82487890/117534201-5d47c900-b02b-11eb-86f9-a9f9c7f09dba.jpg)<br/>
 上図のようにフレーム数が2以上でタンジェントモードが0の場合は<br/>
 曲線のグラフでパスコントロールの値1と値2が同じです。(ホワイトホールパスのイメージです)<br/>
 今回のケースの場合は下図の選択された値を参照します。<br/>
+
 ![j3dbck07](https://user-images.githubusercontent.com/82487890/117534338-ebbc4a80-b02b-11eb-9542-ed2144491e91.jpg)<br/>
 今回の場合ローテートテーブルのテーブル番号1から12(4フレーム × 3)の値を参照します。<br/>
 <table>
@@ -167,6 +167,7 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 </tbody>
 </table>
 今回のデータの場合グラフは下図のようになります。<br/>
+
 ![j3dbck08](https://user-images.githubusercontent.com/82487890/117535156-7a7e9680-b02f-11eb-943a-79bcaa0dd343.jpg)
 
 <br/>
@@ -181,6 +182,33 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 
 </details>
 <hr/>
+
+<details>
+<summary>スケールテーブルとトランスレートテーブル・・・</summary>
+スケールテーブルはジョイントのサイズを<br/>
+設定する項目です1.0がデフォルトの値です。<br/>
+アニメーションテーブルのスケールX,Y,Zの値を参照して<br/>
+アニメーションテーブルの<br/>
+  フレーム数、開始フレーム番号、タンジェントモードの値を使用して<br/>
+読み取り方法を決定しています。<br/>
+  <table>
+    <caption>フレーム数が1の場合</caption>
+<thead>
+<tr>
+<th>テーブル番号</th>
+<th>数値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>番号</td>
+<td>位置の値(Folat型)</td>
+</tr>
+</tbody>
+</table>
+  </details>
+<hr/>
+
 <details>
 <summary>グラフ・・・</summary>
 ファイルを読み込んだ場合グラフタブのコンボボックスを選択すると<br/>

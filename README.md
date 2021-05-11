@@ -188,7 +188,7 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 <br/>
 スケールテーブルはジョイントのサイズを<br/>
 設定する項目です1.0がデフォルトの値です。<br/>
-  トランスレートテーブルはジョイントのサイズを<br/>
+  トランスレートテーブルはジョイントの位置を<br/>
 設定する項目です0.0がデフォルトの値です。<br/>
 アニメーションテーブルのスケールX,Y,Z(または、トランスレートX,Y,Z)の値を参照して<br/>
 アニメーションテーブルの<br/>
@@ -230,6 +230,35 @@ http://mariogalaxy2hack.wiki.fc2.com/wiki/J3D_BCK_Editor<br/>
 </tr>
   <tr>
 <td>タンジェントの値</td>
+<td>値(Folat型)</td>
+</tr>
+</tbody>
+</table>
+  
+  <br/>
+  <table>
+    <caption>フレーム数が2以上でタンジェントモードが0の場合</caption>
+<thead>
+<tr>
+<th>テーブル番号</th>
+<th>数値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>キーフレーム番号</td>
+<td>値(Folat型)</td>
+</tr>
+  <tr>
+<td>スケール、トランスレートの値</td>
+<td>値(Folat型)</td>
+</tr>
+  <tr>
+<td>タンジェントの値1</td>
+<td>値(Folat型)</td>
+</tr>
+   <tr>
+<td>タンジェントの値2</td>
 <td>値(Folat型)</td>
 </tr>
 </tbody>

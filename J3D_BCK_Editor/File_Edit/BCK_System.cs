@@ -12,14 +12,53 @@ using EN = System.Environment;
 
 namespace J3D_BCK_Editor.File_Edit
 {
+    
+    public class BCK_System : BCK_State
+    {//{ "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" } 翻訳専用
+        public static string[] xyzstate = { "倍率X", "回転X", "位置X", "倍率Y", "回転Y", "位置Y", "倍率Z", "回転Z", "位置Z" };
+        public static string joint_name_str = "ジョイント";
 
-    class BCK_System : BCK_State
-    {
-        public void protecttest()
+        public struct frame_data 
         {
-            Debugger.Append(EN.NewLine + debugstr[debugnum] + EN.NewLine);
-            debugnum++;
+            public int key_frame;
+            public int start_frame;
+            public int tangent_mode;
+            public frame_data(int kf , int sf ,int tm) 
+            {
+                this.key_frame = kf;
+                this.start_frame = sf;
+                this.tangent_mode = tm;
+            }
         }
+
+        public struct SRT_data
+        {
+            public frame_data sca;
+            public frame_data rot;
+            public frame_data tra;
+            public SRT_data(frame_data a , frame_data b ,frame_data c)
+            {
+                this.sca = a;
+                this.rot = b;
+                this.tra = c;
+            }
+        }
+
+        public struct XYZ_data 
+        {
+            public SRT_data X;
+            public SRT_data Y;
+            public SRT_data Z;
+            public XYZ_data(SRT_data x , SRT_data y , SRT_data z ) 
+            {
+                this.X = x;
+                this.Y = y;
+                this.Z = z;
+            }
+        }
+
+        public static List<XYZ_data> Joint_Data = new List<XYZ_data>();
+
         /// <summary>
         /// BCKファイルからアニメーションテーブルを読み込みます<br/>
         /// <remarks>Animation_Table_File_Reader(バイナリリード)</remarks>
@@ -27,12 +66,26 @@ namespace J3D_BCK_Editor.File_Edit
         /// 
         public void Animation_Table_File_Reader(BinaryReader br)
         {
-            string[] xyzstate = { "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" };
-                for (int i = 0; i < Bone_Num; i++){
-                    for (int j = 0; j < 9; j++){
-                        dgv1.Rows.Add("ｼﾞｮｲﾝﾄ" + i, xyzstate[j], CS.Byte2Int(br, 2), CS.Byte2Int(br, 2), CS.Byte2Int(br, 2));
-                    }
+            
+            for (int i = 0; i < Bone_Num; i++)
+            {
+                XYZ_data joint = new XYZ_data();
+                frame_data[] fd = new frame_data[9];
+                for (int j = 0; j < 9; j++)
+                {
+                    var cell_1 = joint_name_str + i;
+                    var cell_3 = CS.Byte2Int(br, 2);
+                    var cell_4 = CS.Byte2Int(br, 2);
+                    var cell_5 = CS.Byte2Int(br, 2);
+                    dgv1.Rows.Add(cell_1, xyzstate[j], cell_3, cell_4, cell_5);
+                    fd[j] = new frame_data(cell_3,cell_4,cell_5);
                 }
+                joint.X = new SRT_data(fd[0], fd[1], fd[2]);
+                joint.Y = new SRT_data(fd[3], fd[4], fd[5]);
+                joint.Z = new SRT_data(fd[6], fd[7], fd[8]);
+                Joint_Data.Add(joint);
+                
+            }
             
         }
         /// <summary>

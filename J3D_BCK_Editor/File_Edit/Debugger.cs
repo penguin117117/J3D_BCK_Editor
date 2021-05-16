@@ -12,7 +12,8 @@ namespace J3D_BCK_Editor.File_Edit
         protected static TextBox debug = Form1.Form1Instance.デバッグ;
         protected static TabControl tc = Form1.Form1Instance.tabControl1;
         protected static TabPage tp = Form1.Form1Instance.tabPage6;
-        
+        protected static Button debugbutton = Form1.Form1Instance.debugger;
+
         //デバッグ文章の表示の有無
         public static bool Debug_Text = false;
 
@@ -20,6 +21,7 @@ namespace J3D_BCK_Editor.File_Edit
         {
             debug.Enabled = Debug_Text;
             if (Debug_Text == false)tc.TabPages.Remove(tp);
+            //if (Debug_Text == false) debugbutton.Enabled = false ;
             if (Debug_Text == false) return;
             debug.AppendText(str);
             Console.WriteLine(str);

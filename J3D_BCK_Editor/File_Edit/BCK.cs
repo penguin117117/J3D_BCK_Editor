@@ -11,7 +11,7 @@ using CS = J3D_BCK_Editor.File_Edit.Calculation_System;
 
 namespace J3D_BCK_Editor.File_Edit
 {
-    class BCK_State
+    public class BCK_State
     {
         
         protected static TextBox Txt_Bone_Num = Form1.Form1Instance.Bone_Num;
@@ -131,34 +131,34 @@ namespace J3D_BCK_Editor.File_Edit
             BinaryReader br = new BinaryReader(fs);
 
             //★J3Dヘッダー
-            Magic_1 = CS.Byte2Char(br);
-            Magic_2 = CS.Byte2Char(br);
-            File_Size = CS.Byte2Int(br);
-            Chunk_Count = CS.Byte2Int(br);
-            Subversion = CS.Byte2Char(br);
-            padding = CS.Byte2Char(br,12);
+            Magic_1                     = CS.Byte2Char(br);
+            Magic_2                     = CS.Byte2Char(br);
+            File_Size                   = CS.Byte2Int(br);
+            Chunk_Count                 = CS.Byte2Int(br);
+            Subversion                  = CS.Byte2Char(br);
+            padding                     = CS.Byte2Char(br,12);
 
             //★ANK1ヘッダー
-            Chunk_Type = CS.Byte2Char(br);
-            Anim_Size  = CS.Byte2Int(br);
-            Roop_Mode = CS.Byte2Int(br,1);
-            Rotation_Frac = CS.Byte2Int(br, 1);
-            Frame_Num = CS.Byte2Int(br, 2);
-            Bone_Num = CS.Byte2Int(br, 2);
-            Scale_Table_Count = CS.Byte2Int(br, 2);
-            Rotation_Table_Count = CS.Byte2Int(br, 2);
-            Translation_Table_Count = CS.Byte2Int(br, 2);
+            Chunk_Type                  = CS.Byte2Char(br);
+            Anim_Size                   = CS.Byte2Int(br);
+            Roop_Mode                   = CS.Byte2Int(br,1);
+            Rotation_Frac               = CS.Byte2Int(br, 1);
+            Frame_Num                   = CS.Byte2Int(br, 2);
+            Bone_Num                    = CS.Byte2Int(br, 2);
+            Scale_Table_Count           = CS.Byte2Int(br, 2);
+            Rotation_Table_Count        = CS.Byte2Int(br, 2);
+            Translation_Table_Count     = CS.Byte2Int(br, 2);
             Animation_Data_Table_Offset = CS.Byte2Int(br);
-            Scale_Table_Offset = CS.Byte2Int(br);
-            Rotation_Table_Offset = CS.Byte2Int(br);
-            Translation_Table_Offset = CS.Byte2Int(br);
-            Padding_Data_1 = CS.Byte2Char(br,28);
+            Scale_Table_Offset          = CS.Byte2Int(br);
+            Rotation_Table_Offset       = CS.Byte2Int(br);
+            Translation_Table_Offset    = CS.Byte2Int(br);
+            Padding_Data_1              = CS.Byte2Char(br,28);
 
             //★値をテキストボックスに
-            Txt_Roop_Mode.Text = Roop_Mode.ToString();
-            Txt_Bone_Num.Text = Bone_Num.ToString();
-            Txt_Rot_Frac.Text = Rotation_Frac.ToString();
-            Txt_Total_Frame.Text = Frame_Num.ToString();
+            Txt_Roop_Mode.Text          = Roop_Mode.ToString();
+            Txt_Bone_Num.Text           = Bone_Num.ToString();
+            Txt_Rot_Frac.Text           = Rotation_Frac.ToString();
+            Txt_Total_Frame.Text        = Frame_Num.ToString();
             
 
          //☆デバッガー

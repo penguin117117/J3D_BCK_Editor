@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>penguin.ico</ApplicationIcon>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,7 +98,11 @@
     <None Include="Resources\penguin20.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bckeditor.ico" />
+    <Content Include="favicon.ico" />
+    <Content Include="Icon3.ico" />
     <Content Include="penguin.ico" />
+    <Content Include="Resources\Icon4.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -70,7 +70,8 @@ namespace J3D_BCK_Editor
             Form1.Form1Instance = f;
             Form1.Form1Instance = this;
 
-            
+            debugger.Enabled = false;
+            tabControl1.TabPages.Remove(tabPage6);
             
         }
 
@@ -86,18 +87,18 @@ namespace J3D_BCK_Editor
 
         private void Add_Bone_Click(object sender, EventArgs e)
         {
-            string[] xyzstate = { "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" };
+            //string[] xyzstate = { "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" };
             
                 for (int j = 0; j < 9; j++)
                 { 
-                    dataGridView1.Rows.Add("Bone", xyzstate[j], 1, 0, 0);
+                    dataGridView1.Rows.Add(BCK_System.joint_name_str, BCK_System.xyzstate[j], 1, 0, 0);
                 }
 
             for (int k =0;k < dataGridView1.Rows.Count; k+=9) 
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    dataGridView1.Rows[k+j].Cells["BoneNum"].Value = "Bone" +(k/9);
+                    dataGridView1.Rows[k+j].Cells["BoneNum"].Value = BCK_System.joint_name_str + (k/9);
                 }
             }
         }
@@ -211,6 +212,38 @@ namespace J3D_BCK_Editor
             Plot pt = new Plot();
             textBox3.Text ="アニメーションテーブルの" + EN.NewLine + comboBox3.Text + EN.NewLine + "を参照" + EN.NewLine + EN.NewLine;
             pt.Draw(pictureBox1, dataGridView4, "Translation_Value", float.Parse(textBox1.Text), float.Parse(textBox2.Text));
+        }
+        protected int testnum = 0;
+        private void debugger_Click(object sender, EventArgs e)
+        {
+            if (BCK_System.Joint_Data.Count == 0 ) return ;
+            if (Int32.Parse(Bone_Num.Text) - 1 < testnum) return;
+
+            Debugger.Append(EN.NewLine);
+            Debugger.Append(EN.NewLine);
+            Debugger.Append("ジョイント"+ testnum + EN.NewLine);
+            
+            Debugger.Append("X_倍率"+EN.NewLine);
+
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.sca.key_frame.ToString()+"_");
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.sca.start_frame.ToString() + "_");
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.sca.tangent_mode.ToString());
+
+            Debugger.Append(EN.NewLine);
+            Debugger.Append("X_回転"+EN.NewLine);
+
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.rot.key_frame.ToString() + "_");
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.rot.start_frame.ToString() + "_");
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.rot.tangent_mode.ToString());
+
+            Debugger.Append(EN.NewLine);
+            Debugger.Append("X_位置"+EN.NewLine);
+
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.tra.key_frame.ToString() + "_");
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.tra.start_frame.ToString() + "_");
+            Debugger.Append(BCK_System.Joint_Data[testnum].X.tra.tangent_mode.ToString());
+
+            testnum++;
         }
     }
 }

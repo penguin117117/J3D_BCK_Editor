@@ -279,7 +279,7 @@ namespace J3D_BCK_Editor.File_Edit
             }
             Debugger.Append(""+canvas_size);
             
-            Bitmap canvas2 = new Bitmap(Convert.ToInt32((Frame_Num) *plot_scale+20),Convert.ToInt32 (canvas_size*plot_scaley)+20) ;
+            Bitmap canvas2 = new Bitmap(Convert.ToInt32(Max_Frame * plot_scale + 20), Convert.ToInt32 (canvas_size*plot_scaley)+20) ;
             Graphics g2 = Graphics.FromImage(canvas2);
             g2.Clear(Color.Transparent);
             //描画

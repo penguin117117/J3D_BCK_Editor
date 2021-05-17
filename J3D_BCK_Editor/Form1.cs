@@ -72,7 +72,14 @@ namespace J3D_BCK_Editor
 
             debugger.Enabled = false;
             tabControl1.TabPages.Remove(tabPage6);
+
+            //コマンドライン引数を配列で取得する
+            string[] files = System.Environment.GetCommandLineArgs();
+
+            if (files.Length > 1) File_Select.Filecheck(files[1]);
+                
             
+
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e)

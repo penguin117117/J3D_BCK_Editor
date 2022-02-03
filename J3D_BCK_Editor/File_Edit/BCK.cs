@@ -26,7 +26,7 @@ namespace J3D_BCK_Editor.File_Edit
         protected static ComboBox com1 = Form1.Form1Instance.comboBox1;
         protected static ComboBox com2 = Form1.Form1Instance.comboBox2;
         protected static ComboBox com3 = Form1.Form1Instance.comboBox3;
-        protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
+        protected static ToolStripStatusLabel FileStatus = Form1.Form1Instance.toolStripStatusLabel2;
         protected static List<string> Anim_scale_str = new List<string>();
         protected static List<string> Anim_rotation_str = new List<string>();
         protected static TextBox txt3 = Form1.Form1Instance.textBox3;
@@ -233,8 +233,25 @@ namespace J3D_BCK_Editor.File_Edit
             br.Close();
 
             //ステータスバー設定
-            tssl2.Text = Path.GetFileName(filepath) + "を開きました";
+            FileStatus.Text = Path.GetFileName(filepath) + "を開きました";
+
+            int MaxVal = 0;
+            Console.WriteLine();
+
+            var sMax = FormControlSys.Frames.FetchMaxFrame(dgv2,Plot_List_Scale_Combo);
+            var rMax = FormControlSys.Frames.FetchMaxFrame(dgv3, Plot_List_Rot_Combo);
+            var tMax = FormControlSys.Frames.FetchMaxFrame(dgv4, Plot_List_Trans_Combo);
+
+            Console.WriteLine($"{sMax}:{rMax}:{tMax}");
+            Console.WriteLine(MaxVal);
         }
+
+        public static readonly Dictionary<string, int> AnimMode = new Dictionary<string, int>()
+        {
+            { "StartFrame", 0},
+            { "DataCount", 1 },
+            { "Tan", 2}
+        };
 
         /// <summary>
         /// BCKファイルにエディタのデータを書き込む<br/>
@@ -328,7 +345,7 @@ namespace J3D_BCK_Editor.File_Edit
             fs.Close();
 
             //ステータスバー設定
-            tssl2.Text = Path.GetFileName(filepath)+"を保存しました";
+            FileStatus.Text = Path.GetFileName(filepath)+"を保存しました";
         }
 
      

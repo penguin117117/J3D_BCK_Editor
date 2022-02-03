@@ -14,9 +14,10 @@ namespace J3D_BCK_Editor.File_Edit
 {
     
     public class BCK_System : BCK_State
-    {//{ "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" } 翻訳専用
-        public static string[] xyzstate = { "倍率X", "回転X", "位置X", "倍率Y", "回転Y", "位置Y", "倍率Z", "回転Z", "位置Z" };
-        public static string joint_name_str = "ジョイント";
+    {
+        
+        public static string[] xyzstate;
+        public static string joint_name_str;
 
         public struct frame_data 
         {
@@ -67,6 +68,8 @@ namespace J3D_BCK_Editor.File_Edit
         public void Animation_Table_File_Reader(BinaryReader br)
         {
             
+            xyzstate = Properties.Settings.Default.language == "日本語"?new string[]{ "倍率X", "回転X", "位置X", "倍率Y", "回転Y", "位置Y", "倍率Z", "回転Z", "位置Z" }:new string[]{ "scaleX", "rotateX", "transX", "scaleY", "rotateY", "transY", "scaleZ", "rotateZ", "transZ" };
+            joint_name_str = Properties.Settings.Default.language == "日本語" ? "ジョイント" :"Joint";
             for (int i = 0; i < Bone_Num; i++)
             {
                 XYZ_data joint = new XYZ_data();

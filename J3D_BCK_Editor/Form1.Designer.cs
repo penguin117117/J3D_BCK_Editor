@@ -1,5 +1,4 @@
-﻿
-namespace J3D_BCK_Editor
+﻿namespace J3D_BCK_Editor
 {
     partial class Form1
     {
@@ -34,6 +33,7 @@ namespace J3D_BCK_Editor
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.言語ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -88,11 +88,11 @@ namespace J3D_BCK_Editor
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.debugger = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.デバッグ = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.debugger = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -114,7 +114,8 @@ namespace J3D_BCK_Editor
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ファイルToolStripMenuItem});
+            this.ファイルToolStripMenuItem,
+            this.言語ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(913, 24);
@@ -143,6 +144,13 @@ namespace J3D_BCK_Editor
             this.保存ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.保存ToolStripMenuItem.Text = "保存";
             this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
+            // 
+            // 言語ToolStripMenuItem
+            // 
+            this.言語ToolStripMenuItem.Name = "言語ToolStripMenuItem";
+            this.言語ToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.言語ToolStripMenuItem.Text = "言語/Language";
+            this.言語ToolStripMenuItem.Click += new System.EventHandler(this.言語ToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -285,7 +293,7 @@ namespace J3D_BCK_Editor
             this.BoneDelete.Name = "BoneDelete";
             this.BoneDelete.Size = new System.Drawing.Size(131, 48);
             this.BoneDelete.TabIndex = 2;
-            this.BoneDelete.Text = "ボーン削除";
+            this.BoneDelete.Text = "ジョイント削除";
             this.BoneDelete.UseVisualStyleBackColor = true;
             this.BoneDelete.Click += new System.EventHandler(this.BoneDelete_Click);
             // 
@@ -295,7 +303,7 @@ namespace J3D_BCK_Editor
             this.Add_Bone.Name = "Add_Bone";
             this.Add_Bone.Size = new System.Drawing.Size(131, 48);
             this.Add_Bone.TabIndex = 1;
-            this.Add_Bone.Text = "ボーン追加";
+            this.Add_Bone.Text = "ジョイント追加";
             this.Add_Bone.UseVisualStyleBackColor = true;
             this.Add_Bone.Click += new System.EventHandler(this.Add_Bone_Click);
             // 
@@ -538,51 +546,55 @@ namespace J3D_BCK_Editor
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(271, 433);
+            this.label8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label8.Location = new System.Drawing.Point(272, 420);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 21);
+            this.label8.Size = new System.Drawing.Size(40, 16);
             this.label8.TabIndex = 15;
             this.label8.Text = "位置";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(271, 394);
+            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(272, 374);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 21);
+            this.label7.Size = new System.Drawing.Size(40, 16);
             this.label7.TabIndex = 14;
             this.label7.Text = "回転";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(271, 353);
+            this.label6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label6.Location = new System.Drawing.Point(272, 328);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 21);
+            this.label6.Size = new System.Drawing.Size(40, 16);
             this.label6.TabIndex = 13;
             this.label6.Text = "倍率";
             // 
             // comboBox3
             // 
-            this.comboBox3.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.comboBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(329, 425);
+            this.comboBox3.IntegralHeight = false;
+            this.comboBox3.ItemHeight = 16;
+            this.comboBox3.Location = new System.Drawing.Point(275, 439);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(221, 35);
+            this.comboBox3.Size = new System.Drawing.Size(221, 24);
             this.comboBox3.TabIndex = 12;
             this.comboBox3.Text = "選択してください";
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // comboBox2
             // 
-            this.comboBox2.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.comboBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(329, 386);
+            this.comboBox2.IntegralHeight = false;
+            this.comboBox2.ItemHeight = 16;
+            this.comboBox2.Location = new System.Drawing.Point(275, 393);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(221, 35);
+            this.comboBox2.Size = new System.Drawing.Size(221, 24);
             this.comboBox2.TabIndex = 11;
             this.comboBox2.Text = "選択してください";
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
@@ -638,11 +650,13 @@ namespace J3D_BCK_Editor
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(329, 345);
+            this.comboBox1.IntegralHeight = false;
+            this.comboBox1.ItemHeight = 16;
+            this.comboBox1.Location = new System.Drawing.Point(275, 347);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(221, 35);
+            this.comboBox1.Size = new System.Drawing.Size(221, 24);
             this.comboBox1.TabIndex = 5;
             this.comboBox1.Text = "選択してください";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -669,6 +683,16 @@ namespace J3D_BCK_Editor
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Option";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // debugger
+            // 
+            this.debugger.Location = new System.Drawing.Point(48, 26);
+            this.debugger.Name = "debugger";
+            this.debugger.Size = new System.Drawing.Size(142, 23);
+            this.debugger.TabIndex = 2;
+            this.debugger.Text = "デバッグ";
+            this.debugger.UseVisualStyleBackColor = true;
+            this.debugger.Click += new System.EventHandler(this.debugger_Click);
             // 
             // label10
             // 
@@ -708,16 +732,6 @@ namespace J3D_BCK_Editor
             this.label9.Size = new System.Drawing.Size(42, 12);
             this.label9.TabIndex = 16;
             this.label9.Text = "グラフ値";
-            // 
-            // debugger
-            // 
-            this.debugger.Location = new System.Drawing.Point(48, 26);
-            this.debugger.Name = "debugger";
-            this.debugger.Size = new System.Drawing.Size(142, 23);
-            this.debugger.TabIndex = 2;
-            this.debugger.Text = "デバッグ";
-            this.debugger.UseVisualStyleBackColor = true;
-            this.debugger.Click += new System.EventHandler(this.debugger_Click);
             // 
             // Form1
             // 
@@ -763,6 +777,67 @@ namespace J3D_BCK_Editor
         }
 
         #endregion
+
+        public void English() 
+        {
+            
+            this.menuStrip1.Text = "menuStrip1";
+            this.ファイルToolStripMenuItem.Text = "File";
+            this.開くToolStripMenuItem.Text = "Open";
+            this.保存ToolStripMenuItem.Text = "Save";
+            this.statusStrip1.Text = "statusStrip1";
+            this.toolStripStatusLabel1.Text = "State：";
+            this.toolStripStatusLabel2.Text = "　　　";
+            this.groupBox1.Text = "Chunk header setting";
+            this.label4.Text = "Number of Joints";
+            this.label3.Text = "Number of frames";
+            this.Txt_Roop_Mode.Text = "0";
+            this.Txt_Rot_Frac.Text = "0";
+            this.label2.Text = "Rotation magnification";
+            this.Total_Frame.Text = "0";
+            this.label1.Text = "Loop mode";
+            this.Bone_Num.Text = "1";
+            this.tabPage1.Text = "Animation table";
+            this.BoneDelete.Text = "Deleting a joint";
+            this.Add_Bone.Text = "Adding Joints";
+            this.BoneNum.HeaderText = "Joint number";
+            this.BoneNum.ToolTipText = "This is the joint number of the model";
+            this.XYZ_State.HeaderText = "XYZ Status";
+            this.Frame_Num.HeaderText = "Number of frames";
+            this.Start_Frame.HeaderText = "Start table number";
+            this.Tangent_Mode.HeaderText = "Tangent mode";
+            this.tabPage2.Text = "Scale table";
+            this.ScaleDelete.Text = "Delete Scale";
+            this.ScaleAdd.Text = "Add Scale";
+            this.Table_Num.HeaderText = "TableNo";
+            this.Scale_Value.HeaderText = "Value";
+            this.tabPage3.Text = "Rotation Table";
+            this.RotationDelete.Text = "Delete Rotation";
+            this.RotatinAdd.Text = "Add Rotation";
+            this.Rotation_Table_Num.HeaderText = "TableNo";
+            this.Rotation_Value.HeaderText = "Value";
+            this.tabPage4.Text = "Translation Table";
+            this.TranslationDelete.Text = "Delete Translation";
+            this.TranslationAdd.Text = "Add Translation";
+            this.Translation_Table_Num.HeaderText = "TableNo";
+            this.Translation_Value.HeaderText = "Value";
+            this.tabPage5.Text = "Graph";
+            this.label8.Text = "Translation";
+            this.label7.Text = "Rotation";
+            this.label6.Text = "Scale";
+            this.comboBox3.Text = "Please make a selection";
+            this.comboBox2.Text = "Please make a selection";
+            this.textBox2.Text = "1";
+            this.label5.Text = "Graph magnification( X , Y )";
+            this.textBox1.Text = "1";
+            this.comboBox1.Text = "Please make a selection";
+            this.button1.Text = "Press when changing value";
+            this.tabPage6.Text = "Option";
+            this.debugger.Text = "デバッグ";
+            this.label10.Text = "デバッガー";
+            this.デバッグ.Text = "開発者専用です\r\nDebuggerクラスを参照";
+            this.label9.Text = "Graph value";
+        }
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
@@ -827,6 +902,7 @@ namespace J3D_BCK_Editor
         private System.Windows.Forms.DataGridViewTextBoxColumn Start_Frame;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tangent_Mode;
         public System.Windows.Forms.Button debugger;
+        private System.Windows.Forms.ToolStripMenuItem 言語ToolStripMenuItem;
     }
 }
 

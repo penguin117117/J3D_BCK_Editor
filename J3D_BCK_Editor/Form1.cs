@@ -21,6 +21,7 @@ namespace J3D_BCK_Editor
         
         public Form1()
         {
+            
             InitializeComponent();
 
             // dataGridView1 の すべてのカラムで ソート を 無効化
@@ -77,9 +78,51 @@ namespace J3D_BCK_Editor
             string[] files = System.Environment.GetCommandLineArgs();
 
             if (files.Length > 1) File_Select.Filecheck(files[1]);
-                
+
+            FormReload();
+
+        }
+
+        private void FormReload() 
+        {
+            
             
 
+            if (Properties.Settings.Default.language == "English")
+            {
+                English();
+            }
+            else 
+            {
+                if (Controls.Count > 0)
+                {
+                    Controls.Clear();
+                }
+                InitializeComponent();
+                // dataGridView1 の すべてのカラムで ソート を 無効化
+                foreach (DataGridViewColumn column in this.dataGridView1.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                foreach (DataGridViewColumn column in this.dataGridView2.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                foreach (DataGridViewColumn column in this.dataGridView3.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                foreach (DataGridViewColumn column in this.dataGridView4.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView2.AutoGenerateColumns = false;
+                dataGridView3.AutoGenerateColumns = false;
+                dataGridView4.AutoGenerateColumns = false;
+            }
+            
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e)
@@ -251,6 +294,14 @@ namespace J3D_BCK_Editor
             Debugger.Append(BCK_System.Joint_Data[testnum].X.tra.tangent_mode.ToString());
 
             testnum++;
+        }
+
+        private void 言語ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UI.LanguageSettingForm language = new UI.LanguageSettingForm();
+            language.ShowDialog(this);
+            language.Dispose();
+            FormReload();
         }
     }
 }

@@ -16,6 +16,17 @@ namespace J3D_BCK_Editor.File_Edit
 {
     class Plot : BCK_State
     {
+        private readonly string[] _jpTables = { "スケールテーブル", "ローテートテーブル", "トランスレートテーブル" };
+        private readonly string[] _enTables = { "ScaleTable", "RotationTable", "TranslationTable" };
+        private readonly string _jpDrawn = "を描画しました。";
+        private readonly string _enDrawn = " was drawn." ;
+        private readonly string _jpKeyFrame = "キーフレーム";
+        private readonly string _enKeyFrame = "KeyFrame";
+        private readonly string _jpInsideTableValue = "↓テーブルに入ってる値";
+        private readonly string _enInsideTableValue = "↓The value in the table";
+        private readonly string _jpValue = "値";
+        private readonly string _enValue = "Value";
+
         public void Draw(PictureBox pictureBox1 , DataGridView dgv ,string dgvcellname , float scale = 1 , float scale2 = 0.8f )
         {
             //宣言
@@ -29,7 +40,12 @@ namespace J3D_BCK_Editor.File_Edit
             float plot_scaley = scale2;
             float canvas_size=360;
             string statetxt;
-            string[] cellname = {"スケールテーブル","ローテートテーブル","トランスレートテーブル" };
+            string[] cellname = Properties.Settings.Default.language == "日本語"? _jpTables: _enTables;
+            string statusLabel = Properties.Settings.Default.language == "日本語" ? _jpDrawn : _enDrawn;
+            string keyFrame = Properties.Settings.Default.language == "日本語" ? _jpKeyFrame : _enKeyFrame;
+            string insideTableValue = Properties.Settings.Default.language == "日本語" ? _jpInsideTableValue : _enInsideTableValue;
+            string valuestring = Properties.Settings.Default.language == "日本語" ? _jpValue : _enValue;
+
             string txtbox3_table_name = "エラー";
             //初期化
             if (dgvcellname == "Rotation_Value")
@@ -122,7 +138,7 @@ namespace J3D_BCK_Editor.File_Edit
                 pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
                 //g.Dispose();
                 //ステータスバー設定
-                tssl2.Text = statetxt +"を描画しました。";
+                FileStatus.Text = statetxt + statusLabel;
                 return;
             }
 
@@ -156,11 +172,13 @@ namespace J3D_BCK_Editor.File_Edit
                     dgv3_ta_2 = float.Parse(string.Format("{0:0.##########}", dgv.Rows[i + (3 + pl_tan) + 2].Cells[dgvcellname].Value, CultureInfo.InvariantCulture.NumberFormat))/frac;
                 }
 
+
+
                 if (pl_sfn + (3 + pl_tan) < i )
 
                 {
                     Debugger.Append((i - (3 + pl_tan)).ToString());
-                    Debugger.Append(dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value.ToString() + "ほし★");
+                    Debugger.Append(dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value.ToString() + "★");
                     
                     //dgv3_fn0 = Convert.ToInt16(dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value);
                     dgv3_fn0 = Convert.ToInt16(float.Parse( dgv.Rows[i - (3 + pl_tan)].Cells[dgvcellname].Value.ToString()), CultureInfo.InvariantCulture.NumberFormat);
@@ -180,11 +198,11 @@ namespace J3D_BCK_Editor.File_Edit
 
                 //グラフ値書き込み
                 txt3.AppendText(EN.NewLine + EN.NewLine +"/////////////////////");
-                txt3.AppendText(EN.NewLine + EN.NewLine + "★ﾃｰﾌﾞﾙ番号：" + i);
-                txt3.AppendText(EN.NewLine + "☆ﾃｰﾌﾞﾙ番号：" + (i + 1));
-                txt3.AppendText(EN.NewLine + EN.NewLine + "↓テーブルに入ってる値");
-                txt3.AppendText(EN.NewLine + EN.NewLine + "★キーフレーム：" +p1.X);
-                txt3.AppendText(EN.NewLine + "☆値：" + p1.Y);
+                txt3.AppendText(EN.NewLine + EN.NewLine + $"★{dgv.Columns[1].HeaderCell.Value.ToString()}：" + i);
+                txt3.AppendText(EN.NewLine + $"☆{dgv.Columns[0].HeaderCell.Value.ToString()}：" + (i + 1));
+                txt3.AppendText(EN.NewLine + EN.NewLine + insideTableValue);
+                txt3.AppendText(EN.NewLine + EN.NewLine + $"★{keyFrame}：" +p1.X);
+                txt3.AppendText(EN.NewLine + $"☆{valuestring}:" + p1.Y);
                 //ﾀﾝｼﾞｪﾝﾄﾓｰﾄﾞなし
                 if ((3 + pl_tan) == 3) {
                     //タンジェントモード「なし」のポイント設定&初期化
@@ -309,7 +327,7 @@ namespace J3D_BCK_Editor.File_Edit
             
 
             //ステータスバーの設定
-            tssl2.Text = statetxt + "を描画しました。";
+            FileStatus.Text = statetxt + statusLabel;
         }
     }
 }

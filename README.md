@@ -1,4 +1,5 @@
 # J3D_BCK_Editor
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/penguin117117/J3D_BCK_Editor/total"><br>
 BCKファイルの編集を可能にするツール<br/>
 このソフトを使うにはBCKファイルの知識が必要です。
 ## アップデート情報
